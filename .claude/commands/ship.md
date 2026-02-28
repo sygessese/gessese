@@ -5,15 +5,15 @@ When this command is run, follow these steps exactly:
 ## 1. Check for a running preview server
 Use `preview_list` to see if the dev server is running. If not, start it with `preview_start` using the "gessese-v2" config before taking screenshots.
 
-## 2. Take screenshots of all key pages
-Navigate to each of these routes and take a screenshot using `preview_screenshot`. Save each screenshot to disk at `.pr-assets/screenshots/` using a descriptive filename (e.g. `home.png`, `becoming.png`, `writing.png`). Use the `computer` tool's screenshot capture and save results.
+## 2. Take screenshots of all pages
+Run the auto-discovery screenshot script — it finds every route automatically:
 
-Pages to screenshot:
-- `/` — landing page (scroll to show both name and section doors)
-- `/becoming`
-- `/writing`
-- `/music`
-- `/about`
+```
+cd /Users/gessese/gessese-v2
+/Users/gessese/.nvm/versions/node/v20.20.0/bin/node scripts/screenshot.mjs
+```
+
+This scans `src/app` for all `page.tsx` files, resolves dynamic `[slug]` routes from real content sources, and saves PNGs to `.pr-assets/screenshots/`. No manual page list needed — new pages and new posts are captured automatically.
 
 ## 3. Stage all changes
 Run `git status` to see what changed. Run `git add .` to stage everything including the new screenshots.
@@ -43,10 +43,12 @@ If no GitHub remote exists yet, tell the user:
 ## 7. Create the PR using gh
 Use `gh pr create` with a rich body that includes:
 - A one-paragraph description of what changed and why
-- A screenshot section with embedded images using GitHub raw URLs:
+- A screenshot section with embedded images using the **commit SHA** (not the branch name — branch names with `/` break raw URLs):
   ```
-  ![Home](https://raw.githubusercontent.com/sygessese/gessese-v2/<branch>/.pr-assets/screenshots/home.png)
+  SHA=$(git rev-parse HEAD)
+  ![Home](https://raw.githubusercontent.com/sygessese/gessese/${SHA}/.pr-assets/screenshots/home.png)
   ```
+  Include every file found in `.pr-assets/screenshots/` — the script captures all pages.
 - A checklist of what was changed
 
 Format the PR body like this:
