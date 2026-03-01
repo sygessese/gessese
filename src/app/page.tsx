@@ -32,7 +32,7 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: i * 0.12, duration: 0.7, ease: "easeInOut" },
   }),
 };
 
@@ -57,7 +57,7 @@ export default function Home() {
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, ease: "easeInOut" }}
           style={{
             fontFamily: "var(--font-cormorant)",
             fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
