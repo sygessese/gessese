@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import SilkOrb from "@/components/SilkOrb";
 
 export default function Becoming() {
@@ -122,6 +123,7 @@ export default function Becoming() {
         >
           <a
             href="#preorder"
+            onClick={() => track("preorder_click")}
             style={{
               display: "inline-block",
               fontFamily: "var(--font-dm-sans)",

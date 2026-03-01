@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 
 const platforms = [
   { name: "Spotify", url: "https://open.spotify.com" },
@@ -88,6 +89,7 @@ export default function Music() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
+              onClick={() => track("music_link_click", { platform: p.name.toLowerCase() })}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -109,7 +111,7 @@ export default function Music() {
               }}
             >
               {p.name}
-              <span style={{ fontSize: "1rem", opacity: 0.4 }}>↗</span>
+              <span style={{ fontSize: "1rem", opacity: 0.4 }}>{"↗\uFE0E"}</span>
             </motion.a>
           ))}
           <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />

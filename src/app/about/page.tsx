@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 
 export default function About() {
   return (
@@ -123,6 +124,7 @@ export default function About() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track("about_link_click", { link: label.toLowerCase() })}
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 fontSize: "0.7rem",
@@ -135,7 +137,7 @@ export default function About() {
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--accent)")}
               onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--ink-muted)")}
             >
-              {label} ↗
+              {label} {"↗\uFE0E"}
             </a>
           ))}
         </motion.div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import SilkOrb from "@/components/SilkOrb";
 
 const sections = [
@@ -24,6 +25,11 @@ const sections = [
     href: "/work",
     label: "Work",
     sub: "things i've built",
+  },
+  {
+    href: "/about",
+    label: "About",
+    sub: "the person behind the work",
   },
 ];
 
@@ -110,6 +116,7 @@ export default function Home() {
               <Link
                 href={href}
                 style={{ textDecoration: "none", display: "block" }}
+                onClick={() => track("section_door_click", { section: label.toLowerCase() })}
               >
                 <div
                   style={{
