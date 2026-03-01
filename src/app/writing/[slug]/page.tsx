@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Post } from "@/lib/posts";
+import Comments from "@/components/Comments";
 
 export default function PostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -35,7 +36,7 @@ export default function PostPage() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={{ duration: 0.8, ease: "easeInOut" as const }}
       >
         {/* Back link */}
         <Link
@@ -121,6 +122,9 @@ export default function PostPage() {
             );
           })}
         </div>
+
+        {/* Comments */}
+        <Comments slug={slug} />
       </motion.div>
     </main>
   );

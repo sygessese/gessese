@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { track } from "@vercel/analytics";
 
 const links = [
   { href: "/writing", label: "writing" },
@@ -14,58 +15,29 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "1.5rem 2.5rem",
-        backgroundColor: "transparent",
-      }}
-    >
+    <nav className="site-nav">
       <Link
         href="/"
-        style={{
-          fontFamily: "var(--font-cormorant)",
-          fontSize: "1.1rem",
-          fontWeight: 400,
-          letterSpacing: "0.12em",
-          color: "var(--ink)",
-          textDecoration: "none",
-          textTransform: "uppercase",
-        }}
+        className="nav-name"
+        onClick={() => track("nav_click", { link: "home" })}
       >
-        Selam Gessese
+        <span className="nav-name-full">Selam Gessese</span>
+        <span className="nav-name-stacked" aria-hidden="true">
+          <span>Selam</span>
+          <span>Gessese</span>
+        </span>
       </Link>
 
-      <ul
-        style={{
-          display: "flex",
-          gap: "2.5rem",
-          listStyle: "none",
-          margin: 0,
-          padding: 0,
-        }}
-      >
+      <ul className="nav-links">
         {links.map(({ href, label }) => (
           <li key={href}>
             <Link
               href={href}
+              className="nav-link"
               style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "0.75rem",
-                fontWeight: 400,
-                letterSpacing: "0.1em",
                 color: pathname === href ? "var(--accent)" : "var(--ink-muted)",
-                textDecoration: "none",
-                textTransform: "lowercase",
-                transition: "color 0.2s ease",
               }}
+              onClick={() => track("nav_click", { link: label })}
             >
               {label}
             </Link>

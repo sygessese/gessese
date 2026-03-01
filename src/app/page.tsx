@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import SilkOrb from "@/components/SilkOrb";
 
 const sections = [
@@ -25,6 +26,11 @@ const sections = [
     label: "Work",
     sub: "things i've built",
   },
+  {
+    href: "/about",
+    label: "About",
+    sub: "the person behind the work",
+  },
 ];
 
 const fadeUp = {
@@ -32,7 +38,7 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7, ease: "easeInOut" },
+    transition: { delay: i * 0.12, duration: 0.7, ease: "easeInOut" as const },
   }),
 };
 
@@ -57,7 +63,7 @@ export default function Home() {
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 1, ease: "easeInOut" as const }}
           style={{
             fontFamily: "var(--font-cormorant)",
             fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
@@ -110,6 +116,7 @@ export default function Home() {
               <Link
                 href={href}
                 style={{ textDecoration: "none", display: "block" }}
+                onClick={() => track("section_door_click", { section: label.toLowerCase() })}
               >
                 <div
                   style={{
