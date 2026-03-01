@@ -36,7 +36,7 @@ export default function Becoming() {
             x: [0, 20, -10, 8, 0],
             y: [0, -18, 12, -6, 0],
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" as const }}
         />
       </div>
 
@@ -62,7 +62,7 @@ export default function Becoming() {
         <motion.h1
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 1, ease: "easeInOut" }}
+          transition={{ delay: 0.15, duration: 1, ease: "easeInOut" as const }}
           style={{
             fontFamily: "var(--font-cormorant)",
             fontSize: "clamp(4rem, 12vw, 9rem)",

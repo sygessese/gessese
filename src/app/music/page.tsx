@@ -24,7 +24,7 @@ export default function Music() {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={{ duration: 0.8, ease: "easeInOut" as const }}
       >
         <h1
           style={{

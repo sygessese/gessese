@@ -30,7 +30,7 @@ export default function SilkOrb() {
         transition={{
           duration: 22,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
       >
         {/* Core blob */}
@@ -50,7 +50,7 @@ export default function SilkOrb() {
           transition={{
             duration: 22,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
           }}
         />
 
@@ -75,7 +75,7 @@ export default function SilkOrb() {
           transition={{
             duration: 14,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
             delay: 1,
           }}
         />
@@ -98,7 +98,7 @@ export default function SilkOrb() {
         transition={{
           duration: 26,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
       >
         {/* Peach core */}
@@ -118,7 +118,7 @@ export default function SilkOrb() {
           transition={{
             duration: 26,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
           }}
         />
 
@@ -143,7 +143,7 @@ export default function SilkOrb() {
           transition={{
             duration: 18,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
             delay: 2,
           }}
         />
@@ -166,7 +166,7 @@ export default function SilkOrb() {
         transition={{
           duration: 24,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "easeInOut" as const,
         }}
       >
         {/* Lilac core */}
@@ -186,7 +186,7 @@ export default function SilkOrb() {
           transition={{
             duration: 24,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
           }}
         />
 
@@ -211,7 +211,7 @@ export default function SilkOrb() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut" as const,
             delay: 3,
           }}
         />
