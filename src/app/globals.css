@@ -4,8 +4,23 @@
   --cream: #F9F7F4;
   --ink: #1A1A18;
   --ink-muted: #6B6B68;
-  --accent: #C4A882;
-  --accent-light: #EDE0D0;
+  --accent: #C4A0BC;
+  --accent-light: #E8DFE8;
+
+  /* Orb 1 (Rose Quartz) */
+  --orb-1-center: #DDB8CC;
+  --orb-1-blend: #D4A878;
+  --orb-1-outer: #E8D8E4;
+
+  /* Orb 2 (Peach) */
+  --orb-2-center: #E8A878;
+  --orb-2-blend: #D4956A;
+  --orb-2-outer: #F0C4A0;
+
+  /* Orb 3 (Lilac) */
+  --orb-3-center: #C8B0D4;
+  --orb-3-blend: #A898B8;
+  --orb-3-outer: #D8C8E0;
 }
 
 @theme inline {
