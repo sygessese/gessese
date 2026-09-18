@@ -3,188 +3,203 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { track } from "@vercel/analytics";
-import SilkOrb from "@/components/SilkOrb";
+import { useEffect, useState } from "react";
+import type { Post } from "@/lib/posts";
 
-const sections = [
-  {
-    href: "/writing",
-    label: "Writing",
-    sub: "essays · musings · brain dumps",
-  },
-  {
-    href: "/music",
-    label: "Music",
-    sub: "streaming everywhere",
-  },
-  {
-    href: "/becoming",
-    label: "Becoming",
-    sub: "a poetry collection · preorder now",
-  },
-  {
-    href: "/work",
-    label: "Work",
-    sub: "things i've built",
-  },
-  {
-    href: "/about",
-    label: "About",
-    sub: "the person behind the work",
-  },
+/* ────────────────────────────────────────────────────────────
+   Homepage: the rule, the photograph, the rooms in two columns.
+   ──────────────────────────────────────────────────────────── */
+
+const rooms = [
+  { href: "/writing", label: "Writing", sub: "essays · musings · brain dumps" },
+  { href: "/music", label: "Music", sub: "streaming everywhere" },
+  { href: "/becoming", label: "Bloom", sub: "a poetry collection · preorder now" },
+  { href: "/work", label: "Work", sub: "things i've built" },
+  { href: "/about", label: "About", sub: "the person behind the work" },
 ];
 
+const photograph = { src: "/photos/bay.jpg", caption: "Gran Canaria", pos: "50% 60%" };
+
+const ease = "easeInOut" as const;
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 18 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7, ease: "easeInOut" as const },
+    transition: { delay: 0.25 + i * 0.08, duration: 0.6, ease },
   }),
 };
 
+const cap: React.CSSProperties = {
+  fontFamily: "var(--font-util)",
+  fontSize: "0.7rem",
+  fontWeight: 400,
+  letterSpacing: "0.16em",
+  textTransform: "uppercase",
+  color: "var(--slate)",
+};
+
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long" });
+}
+
+const hoverRed = {
+  onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+    (e.currentTarget.querySelector(".room-label") as HTMLElement).style.color = "var(--assassin)";
+    const a = e.currentTarget.querySelector(".room-arrow") as HTMLElement | null;
+    if (a) a.style.opacity = "1";
+  },
+  onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+    (e.currentTarget.querySelector(".room-label") as HTMLElement).style.color = "var(--ink)";
+    const a = e.currentTarget.querySelector(".room-arrow") as HTMLElement | null;
+    if (a) a.style.opacity = "0";
+  },
+};
+
 export default function Home() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((r) => r.json())
+      .then((d) => setPosts(d))
+      .catch(() => {});
+  }, []);
+
+  const latest = posts[0];
+
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--cream)",
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "8rem 2.5rem 4rem",
-      }}
-    >
-      <SilkOrb />
+    <>
+      <main style={{ minHeight: "100vh", padding: "7.5rem 2.5rem 4rem", maxWidth: "1400px", margin: "0 auto" }}>
+        {/* the name */}
+        {(
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease }}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2.6rem, 8.6vw, 8.6rem)",
+              fontWeight: 500,
+              lineHeight: 0.95,
+              letterSpacing: "-0.015em",
+              color: "var(--ink)",
+              whiteSpace: "nowrap",
+              marginBottom: "1.25rem",
+              marginLeft: "-0.04em",
+            }}
+          >
+            Selam Gessese
+          </motion.h1>
+        )}
 
-      <div style={{ position: "relative", zIndex: 1, maxWidth: "680px" }}>
-        {/* Name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" as const }}
-          style={{
-            fontFamily: "var(--font-cormorant)",
-            fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
-            fontWeight: 300,
-            lineHeight: 0.92,
-            letterSpacing: "-0.01em",
-            color: "var(--ink)",
-            marginBottom: "1.25rem",
-          }}
-        >
-          Selam
-          <br />
-          <span style={{ fontStyle: "italic" }}>Gessese</span>
-        </motion.h1>
-
-        {/* Identity line */}
-        <motion.p
+        {/* the rule */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          style={{
-            fontFamily: "var(--font-dm-sans)",
-            fontSize: "0.8rem",
-            fontWeight: 300,
-            letterSpacing: "0.2em",
-            color: "var(--ink-muted)",
-            textTransform: "uppercase",
-            marginBottom: "5rem",
-          }}
-        >
-          poet &nbsp;·&nbsp; musician &nbsp;·&nbsp; writer
-        </motion.p>
-
-        {/* Section doors */}
-        <div
+          transition={{ delay: 0.2, duration: 0.8 }}
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: "0",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            gap: "2rem",
+            flexWrap: "wrap",
+            borderTop: "1px solid var(--ink)",
+            paddingTop: "0.9rem",
           }}
         >
-          {sections.map(({ href, label, sub }, i) => (
-            <motion.div
-              key={href}
-              custom={i}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-            >
-              <Link
-                href={href}
-                style={{ textDecoration: "none", display: "block" }}
-                onClick={() => track("section_door_click", { section: label.toLowerCase() })}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: "1.5rem",
-                    padding: "1.4rem 0",
-                    borderTop: "1px solid rgba(26,26,24,0.1)",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget.querySelector(".door-label") as HTMLElement).style.color = "var(--accent)";
-                    (e.currentTarget.querySelector(".door-arrow") as HTMLElement).style.opacity = "1";
-                    (e.currentTarget.querySelector(".door-arrow") as HTMLElement).style.transform = "translateX(6px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget.querySelector(".door-label") as HTMLElement).style.color = "var(--ink)";
-                    (e.currentTarget.querySelector(".door-arrow") as HTMLElement).style.opacity = "0";
-                    (e.currentTarget.querySelector(".door-arrow") as HTMLElement).style.transform = "translateX(0px)";
-                  }}
-                >
-                  <span
-                    className="door-label"
-                    style={{
-                      fontFamily: "var(--font-cormorant)",
-                      fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-                      fontWeight: 400,
-                      color: "var(--ink)",
-                      transition: "color 0.2s ease",
-                      minWidth: "160px",
-                    }}
-                  >
-                    {label}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "0.72rem",
-                      fontWeight: 300,
-                      letterSpacing: "0.1em",
-                      color: "var(--ink-muted)",
-                      textTransform: "lowercase",
-                    }}
-                  >
-                    {sub}
-                  </span>
-                  <span
-                    className="door-arrow"
-                    style={{
-                      marginLeft: "auto",
-                      fontSize: "1rem",
-                      color: "var(--accent)",
-                      opacity: 0,
-                      transition: "opacity 0.2s ease, transform 0.2s ease",
-                    }}
-                  >
-                    →
-                  </span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+          <span style={cap}>software engineer &nbsp;·&nbsp; writer &nbsp;·&nbsp; music producer</span>
+          <Link
+            href="/becoming"
+            style={{ ...cap, color: "var(--assassin)", textDecoration: "none" }}
+            onClick={() => track("section_door_click", { section: "bloom-rule" })}
+          >
+            bloom · a poetry collection · preorder now
+          </Link>
+        </motion.div>
 
-          {/* Last border */}
-          <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />
-        </div>
-      </div>
-    </main>
+        {/* the photograph */}
+        <motion.figure
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1, ease }}
+          style={{
+            position: "relative",
+            margin: "1.5rem 0 0",
+            height: "clamp(320px, 60vh, 720px)",
+            backgroundColor: "var(--mist)",
+            overflow: "hidden",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={photograph.src}
+            alt={photograph.caption}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: photograph.pos }}
+          />
+          <figcaption style={{ ...cap, position: "absolute", left: "1.25rem", bottom: "1rem", color: "#FFFFFF", mixBlendMode: "difference" }}>
+            {photograph.caption}
+          </figcaption>
+        </motion.figure>
+
+        {/* ── the rooms · grid ─────────────────────────────── */}
+        {(
+          <div
+            className="rooms-grid"
+            style={{ display: "grid", columnGap: "5rem", marginTop: "4rem" }}
+          >
+            {rooms.map(({ href, label, sub }, i) => (
+              <motion.div key={href} custom={i} initial="hidden" animate="visible" variants={fadeUp}>
+                <Link href={href} style={{ textDecoration: "none", display: "block" }} onClick={() => track("section_door_click", { section: label.toLowerCase() })}>
+                  <div
+                    {...hoverRed}
+                    style={{
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: "1.25rem",
+                      padding: "1.5rem 2rem 1.5rem 0",
+                      borderTop: "1px solid var(--line)",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      className="room-label"
+                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 3.1vw, 2.9rem)", fontWeight: 500, lineHeight: 1, color: "var(--ink)", transition: "color 0.2s ease", minWidth: "150px" }}
+                    >
+                      {label}
+                    </span>
+                    <span style={{ ...cap, fontSize: "0.76rem", letterSpacing: "0.1em", textTransform: "lowercase", whiteSpace: "nowrap" }}>{sub}</span>
+                    <span className="room-arrow" style={{ position: "absolute", right: 0, color: "var(--assassin)", opacity: 0, transition: "opacity 0.2s ease" }}>
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+
+            {/* sixth cell — the latest piece, so the grid closes and the page has a pulse */}
+            <motion.div custom={5} initial="hidden" animate="visible" variants={fadeUp}>
+              {latest && (
+                <Link href={`/writing/${latest.slug}`} style={{ textDecoration: "none", display: "block" }}>
+                  <div {...hoverRed} style={{ padding: "1.5rem 0", borderTop: "1px solid var(--line)", cursor: "pointer" }}>
+                    <div style={{ ...cap, marginBottom: "0.6rem" }}>
+                      Recent &nbsp;·&nbsp; {fmtDate(latest.date)}
+                    </div>
+                    <div
+                      className="room-label"
+                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.6rem, 2.4vw, 2.1rem)", fontWeight: 500, fontStyle: "italic", lineHeight: 1.1, color: "var(--ink)", transition: "color 0.2s ease" }}
+                    >
+                      {latest.title}
+                    </div>
+                  </div>
+                </Link>
+              )}
+            </motion.div>
+          </div>
+        )}
+
+      </main>
+
+    </>
   );
 }

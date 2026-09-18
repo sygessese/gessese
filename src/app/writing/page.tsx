@@ -18,9 +18,9 @@ export default function Writing() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--cream)",
+        backgroundColor: "var(--paper)",
         padding: "10rem 2.5rem 6rem",
-        maxWidth: "720px",
+        maxWidth: "900px",
         margin: "0 auto",
       }}
     >
@@ -31,9 +31,9 @@ export default function Writing() {
       >
         <h1
           style={{
-            fontFamily: "var(--font-cormorant)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(3rem, 7vw, 5.5rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             lineHeight: 0.95,
             color: "var(--ink)",
             marginBottom: "0.5rem",
@@ -43,10 +43,10 @@ export default function Writing() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-util)",
             fontSize: "0.75rem",
             letterSpacing: "0.15em",
-            color: "var(--ink-muted)",
+            color: "var(--slate)",
             textTransform: "uppercase",
             marginBottom: "5rem",
           }}
@@ -64,10 +64,10 @@ export default function Writing() {
             >
               <Link href={`/writing/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
                 <div
-                  style={{ padding: "2.5rem 0", borderTop: "1px solid rgba(26,26,24,0.1)", cursor: "pointer" }}
+                  style={{ padding: "2.5rem 0", borderTop: "1px solid var(--line)", cursor: "pointer" }}
                   onMouseEnter={(e) => {
                     const title = e.currentTarget.querySelector(".post-title") as HTMLElement;
-                    if (title) title.style.color = "var(--accent)";
+                    if (title) title.style.color = "var(--assassin)";
                   }}
                   onMouseLeave={(e) => {
                     const title = e.currentTarget.querySelector(".post-title") as HTMLElement;
@@ -76,10 +76,10 @@ export default function Writing() {
                 >
                   <div
                     style={{
-                      fontFamily: "var(--font-dm-sans)",
+                      fontFamily: "var(--font-util)",
                       fontSize: "0.7rem",
                       letterSpacing: "0.12em",
-                      color: "var(--ink-muted)",
+                      color: "var(--slate)",
                       marginBottom: "0.75rem",
                       textTransform: "uppercase",
                     }}
@@ -89,9 +89,9 @@ export default function Writing() {
                   <h2
                     className="post-title"
                     style={{
-                      fontFamily: "var(--font-cormorant)",
+                      fontFamily: "var(--font-display)",
                       fontSize: "clamp(1.5rem, 3vw, 2rem)",
-                      fontWeight: 400,
+                      fontWeight: 500,
                       fontStyle: "italic",
                       color: "var(--ink)",
                       marginBottom: "0.75rem",
@@ -103,11 +103,11 @@ export default function Writing() {
                   </h2>
                   <p
                     style={{
-                      fontFamily: "var(--font-dm-sans)",
-                      fontSize: "0.85rem",
-                      fontWeight: 300,
-                      lineHeight: 1.75,
-                      color: "var(--ink-muted)",
+                      fontFamily: "var(--font-read)",
+                      fontSize: "1rem",
+                      fontWeight: 400,
+                      lineHeight: 1.6,
+                      color: "var(--slate)",
                     }}
                   >
                     {post.description}
@@ -116,7 +116,7 @@ export default function Writing() {
               </Link>
             </motion.div>
           ))}
-          {posts.length > 0 && <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />}
+          {posts.length > 0 && <div style={{ borderTop: "1px solid var(--line)" }} />}
         </div>
       </motion.div>
     </main>

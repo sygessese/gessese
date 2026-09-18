@@ -8,7 +8,7 @@ export default function About() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--cream)",
+        backgroundColor: "var(--paper)",
         padding: "10rem 2.5rem 6rem",
         maxWidth: "720px",
         margin: "0 auto",
@@ -21,9 +21,9 @@ export default function About() {
       >
         <h1
           style={{
-            fontFamily: "var(--font-cormorant)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(3rem, 7vw, 5.5rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             lineHeight: 0.95,
             color: "var(--ink)",
             marginBottom: "5rem",
@@ -46,7 +46,7 @@ export default function About() {
           <div
             style={{
               aspectRatio: "3/4",
-              backgroundColor: "var(--accent-light)",
+              backgroundColor: "var(--mist)",
               borderRadius: "2px",
             }}
           />
@@ -57,9 +57,9 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
               style={{
-                fontFamily: "var(--font-cormorant)",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(1.2rem, 2.5vw, 1.55rem)",
-                fontWeight: 400,
+                fontWeight: 500,
                 fontStyle: "italic",
                 lineHeight: 1.65,
                 color: "var(--ink)",
@@ -74,15 +74,15 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.45, duration: 0.8 }}
               style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "0.85rem",
-                fontWeight: 300,
-                lineHeight: 1.85,
-                color: "var(--ink-muted)",
+                fontFamily: "var(--font-read)",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "var(--slate)",
                 marginBottom: "1.5rem",
               }}
             >
-              My debut poetry collection, <em>Becoming</em>, is in progress — a meditation on identity, transformation, and what it means to stay.
+              My debut poetry collection, <em>Bloom</em>, is in progress — a meditation on identity, transformation, and what it means to stay.
             </motion.p>
 
             <motion.p
@@ -90,11 +90,11 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.55, duration: 0.8 }}
               style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "0.85rem",
-                fontWeight: 300,
-                lineHeight: 1.85,
-                color: "var(--ink-muted)",
+                fontFamily: "var(--font-read)",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "var(--slate)",
               }}
             >
               I also write software — systems, interfaces, things that work. I hold a degree in Political Science from the University of Washington and trained at Hack Reactor.
@@ -111,7 +111,7 @@ export default function About() {
             display: "flex",
             gap: "2.5rem",
             paddingTop: "3rem",
-            borderTop: "1px solid rgba(26,26,24,0.1)",
+            borderTop: "1px solid var(--line)",
           }}
         >
           {[
@@ -126,16 +126,16 @@ export default function About() {
               rel="noopener noreferrer"
               onClick={() => track("about_link_click", { link: label.toLowerCase() })}
               style={{
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-util)",
                 fontSize: "0.7rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--ink-muted)",
+                color: "var(--slate)",
                 textDecoration: "none",
                 transition: "color 0.2s ease",
               }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--accent)")}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--ink-muted)")}
+              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--assassin)")}
+              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--slate)")}
             >
               {label} {"↗\uFE0E"}
             </a>

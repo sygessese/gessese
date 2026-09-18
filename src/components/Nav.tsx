@@ -7,7 +7,7 @@ import { track } from "@vercel/analytics";
 const links = [
   { href: "/writing", label: "writing" },
   { href: "/music", label: "music" },
-  { href: "/becoming", label: "becoming" },
+  { href: "/becoming", label: "bloom" },
   { href: "/about", label: "about" },
 ];
 
@@ -35,7 +35,7 @@ export default function Nav() {
               href={href}
               className="nav-link"
               style={{
-                color: pathname === href ? "var(--accent)" : "var(--ink-muted)",
+                color: pathname === href ? "var(--assassin)" : "var(--slate)",
               }}
               onClick={() => track("nav_click", { link: label })}
             >

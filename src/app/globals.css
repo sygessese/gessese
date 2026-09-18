@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #F9F7F4;
-  --ink: #1A1A18;
-  --ink-muted: #6B6B68;
-  --accent: #C4A0BC;
-  --accent-light: #E8DFE8;
+  /* ── Selam Gessese system · cool neutrals, one red ── */
+  --paper: #FFFFFF;
+  --ink: #0F1115;
+  --slate: #5B6472;
+  --line: #E4E7EB;
+  --mist: #F1F4F7;
+  --assassin: #C30D2A;
 
-  /* Orb 1 (Rose Quartz) */
-  --orb-1-center: #DDB8CC;
-  --orb-1-blend: #D4A878;
-  --orb-1-outer: #E8D8E4;
+  /* legacy aliases — old names still resolve while pages migrate */
+  --cream: var(--paper);
+  --ink-muted: var(--slate);
+  --accent: var(--assassin);
+  --accent-light: var(--mist);
+  --font-cormorant: var(--font-display);
+  --font-dm-sans: var(--font-util);
+}
 
-  /* Orb 2 (Peach) */
-  --orb-2-center: #E8A878;
-  --orb-2-blend: #D4956A;
-  --orb-2-outer: #F0C4A0;
-
-  /* Orb 3 (Lilac) */
-  --orb-3-center: #C8B0D4;
-  --orb-3-blend: #A898B8;
-  --orb-3-outer: #D8C8E0;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0C0E12;
+    --ink: #EDEFF2;
+    --slate: #8D96A4;
+    --line: #232832;
+    --mist: #141821;
+    --assassin: #F04A62;
+  }
 }
 
 @theme inline {
-  --color-cream: var(--cream);
+  --color-paper: var(--paper);
   --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-accent: var(--accent);
-  --color-accent-light: var(--accent-light);
+  --color-slate: var(--slate);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+  --color-assassin: var(--assassin);
 }
 
 * {
@@ -42,15 +49,16 @@ html {
 }
 
 body {
-  background-color: var(--cream);
+  background-color: var(--paper);
   color: var(--ink);
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Selection color */
 ::selection {
-  background-color: var(--accent-light);
+  background-color: var(--mist);
   color: var(--ink);
 }
 
@@ -62,7 +70,7 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: var(--line);
   border-radius: 2px;
 }
 
@@ -77,16 +85,17 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2.5rem;
-  background-color: rgba(249, 247, 244, 0.85);
+  background-color: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-name {
-  font-family: var(--font-cormorant);
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
+  /* Archivo 500 — the name as one of the labels; the hero carries the name */
+  font-family: var(--font-util);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   color: var(--ink);
   text-decoration: none;
   text-transform: uppercase;
@@ -110,10 +119,10 @@ body {
 }
 
 .nav-link {
-  font-family: var(--font-dm-sans);
-  font-size: 0.75rem;
+  font-family: var(--font-util);
+  font-size: 0.7rem;
   font-weight: 400;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-decoration: none;
   text-transform: lowercase;
   transition: color 0.2s ease;
@@ -152,5 +161,15 @@ body {
   }
   .nav-links li {
     flex-shrink: 0;
+  }
+}
+
+/* ── Home · rooms ───────────────────────────── */
+.rooms-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .rooms-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

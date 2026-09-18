@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Bodoni_Moda, Archivo, Spectral } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+// display — Bodoni Moda, variable; opsz is the register dial (auto by size)
+const display = Bodoni_Moda({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+// util — Archivo, small sizes only: nav, dates, labels
+const util = Archivo({
+  variable: "--font-util",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+});
+
+// read — Spectral, long-form screen reading
+const read = Spectral({
+  variable: "--font-read",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -34,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body style={{ backgroundColor: "var(--cream)", color: "var(--ink)" }}>
+    <html lang="en" className={`${display.variable} ${util.variable} ${read.variable}`}>
+      <body style={{ backgroundColor: "var(--paper)", color: "var(--ink)" }}>
         <Nav />
         {children}
         <Analytics />

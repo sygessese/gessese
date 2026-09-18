@@ -80,11 +80,11 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p
       style={{
-        fontFamily: "var(--font-dm-sans)",
+        fontFamily: "var(--font-util)",
         fontSize: "0.65rem",
         letterSpacing: "0.2em",
         textTransform: "uppercase",
-        color: "var(--ink-muted)",
+        color: "var(--slate)",
         marginBottom: "2rem",
         paddingTop: "4rem",
       }}
@@ -99,7 +99,7 @@ function HairlineRow({ children, delay = 0 }: { children: React.ReactNode; delay
     <motion.div
       {...fadeUp(delay)}
       style={{
-        borderTop: "1px solid rgba(26,26,24,0.1)",
+        borderTop: "1px solid var(--line)",
         padding: "2rem 0",
       }}
     >
@@ -115,7 +115,7 @@ export default function Work() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--cream)",
+        backgroundColor: "var(--paper)",
         padding: "10rem 2.5rem 8rem",
         maxWidth: "720px",
         margin: "0 auto",
@@ -124,9 +124,9 @@ export default function Work() {
       <motion.div {...fadeUp(0)}>
         <h1
           style={{
-            fontFamily: "var(--font-cormorant)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(3rem, 7vw, 5.5rem)",
-            fontWeight: 300,
+            fontWeight: 500,
             lineHeight: 0.95,
             color: "var(--ink)",
             marginBottom: "0.5rem",
@@ -136,10 +136,10 @@ export default function Work() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-util)",
             fontSize: "0.75rem",
             letterSpacing: "0.15em",
-            color: "var(--ink-muted)",
+            color: "var(--slate)",
             textTransform: "uppercase",
           }}
         >
@@ -155,17 +155,16 @@ export default function Work() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
-                gap: "1rem",
+                flexDirection: "column-reverse",
+                gap: "0.5rem",
                 marginBottom: "0.4rem",
               }}
             >
               <h2
                 style={{
-                  fontFamily: "var(--font-cormorant)",
+                  fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   color: "var(--ink)",
                 }}
               >
@@ -173,10 +172,10 @@ export default function Work() {
               </h2>
               <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-util)",
                   fontSize: "0.65rem",
-                  letterSpacing: "0.1em",
-                  color: "var(--ink-muted)",
+                  letterSpacing: "0.14em",
+                  color: "var(--slate)",
                   textTransform: "uppercase",
                   whiteSpace: "nowrap",
                 }}
@@ -186,11 +185,11 @@ export default function Work() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-util)",
                 fontSize: "0.75rem",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "var(--accent)",
+                color: "var(--slate)",
                 marginBottom: "0.75rem",
               }}
             >
@@ -198,18 +197,18 @@ export default function Work() {
             </p>
             <p
               style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "0.85rem",
-                fontWeight: 300,
-                lineHeight: 1.75,
-                color: "var(--ink-muted)",
+                fontFamily: "var(--font-read)",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "var(--slate)",
               }}
             >
               {e.details}
             </p>
           </HairlineRow>
         ))}
-        <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />
+        <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
 
       {/* ── Education ── */}
@@ -220,17 +219,16 @@ export default function Work() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
-                gap: "1rem",
+                flexDirection: "column-reverse",
+                gap: "0.5rem",
                 marginBottom: "0.3rem",
               }}
             >
               <h2
                 style={{
-                  fontFamily: "var(--font-cormorant)",
+                  fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   color: "var(--ink)",
                 }}
               >
@@ -238,10 +236,10 @@ export default function Work() {
               </h2>
               <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-util)",
                   fontSize: "0.65rem",
-                  letterSpacing: "0.1em",
-                  color: "var(--ink-muted)",
+                  letterSpacing: "0.14em",
+                  color: "var(--slate)",
                   textTransform: "uppercase",
                   whiteSpace: "nowrap",
                 }}
@@ -251,11 +249,11 @@ export default function Work() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-util)",
                 fontSize: "0.75rem",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "var(--accent)",
+                color: "var(--slate)",
                 marginBottom: e.details ? "0.75rem" : 0,
               }}
             >
@@ -264,11 +262,11 @@ export default function Work() {
             {e.details && (
               <p
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-util)",
                   fontSize: "0.8rem",
-                  fontWeight: 300,
+                  fontWeight: 400,
                   lineHeight: 1.7,
-                  color: "var(--ink-muted)",
+                  color: "var(--slate)",
                 }}
               >
                 {e.details}
@@ -276,7 +274,7 @@ export default function Work() {
             )}
           </HairlineRow>
         ))}
-        <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />
+        <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
 
       {/* ── Projects ── */}
@@ -295,9 +293,9 @@ export default function Work() {
             >
               <h2
                 style={{
-                  fontFamily: "var(--font-cormorant)",
+                  fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 400,
+                  fontWeight: 500,
                   color: "var(--ink)",
                 }}
               >
@@ -305,10 +303,10 @@ export default function Work() {
               </h2>
               <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-util)",
                   fontSize: "0.65rem",
-                  letterSpacing: "0.1em",
-                  color: "var(--ink-muted)",
+                  letterSpacing: "0.14em",
+                  color: "var(--slate)",
                   textTransform: "uppercase",
                   whiteSpace: "nowrap",
                 }}
@@ -318,11 +316,11 @@ export default function Work() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: "0.85rem",
-                fontWeight: 300,
-                lineHeight: 1.75,
-                color: "var(--ink-muted)",
+                fontFamily: "var(--font-read)",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "var(--slate)",
                 marginBottom: "1rem",
                 maxWidth: "540px",
               }}
@@ -334,13 +332,13 @@ export default function Work() {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                fontFamily: "var(--font-dm-sans)",
+                fontFamily: "var(--font-util)",
                 fontSize: "0.7rem",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--accent)",
+                color: "var(--assassin)",
                 textDecoration: "none",
-                borderBottom: "1px solid var(--accent)",
+                borderBottom: "1px solid var(--assassin)",
                 paddingBottom: "1px",
               }}
             >
@@ -348,13 +346,13 @@ export default function Work() {
             </a>
           </HairlineRow>
         ))}
-        <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }} />
+        <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
 
       {/* ── Skills ── */}
       <motion.div {...fadeUp(0.4)}>
         <SectionLabel>Skills</SectionLabel>
-        <div style={{ borderTop: "1px solid rgba(26,26,24,0.1)" }}>
+        <div style={{ borderTop: "1px solid var(--line)" }}>
           {skills.map((s, i) => (
             <motion.div
               key={s.label}
@@ -364,17 +362,17 @@ export default function Work() {
                 gridTemplateColumns: "120px 1fr",
                 gap: "1.5rem",
                 padding: "1.25rem 0",
-                borderBottom: "1px solid rgba(26,26,24,0.1)",
+                borderBottom: "1px solid var(--line)",
                 alignItems: "start",
               }}
             >
               <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
+                  fontFamily: "var(--font-util)",
                   fontSize: "0.65rem",
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
-                  color: "var(--ink-muted)",
+                  color: "var(--slate)",
                   paddingTop: "2px",
                 }}
               >
@@ -382,10 +380,10 @@ export default function Work() {
               </span>
               <span
                 style={{
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: "0.85rem",
-                  fontWeight: 300,
-                  lineHeight: 1.6,
+                  fontFamily: "var(--font-read)",
+                  fontSize: "1rem",
+                  fontWeight: 400,
+                  lineHeight: 1.65,
                   color: "var(--ink)",
                 }}
               >
