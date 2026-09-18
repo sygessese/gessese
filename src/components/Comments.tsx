@@ -73,12 +73,12 @@ export default function Comments({ slug }: { slug: string }) {
   };
 
   return (
-    <section style={{ marginTop: "6rem", paddingTop: "3rem", borderTop: "1px solid rgba(26,26,24,0.1)" }}>
+    <section style={{ marginTop: "6rem", paddingTop: "3rem", borderTop: "1px solid var(--line)" }}>
       <h2
         style={{
-          fontFamily: "var(--font-cormorant)",
+          fontFamily: "var(--font-display)",
           fontSize: "1.8rem",
-          fontWeight: 400,
+          fontWeight: 500,
           fontStyle: "italic",
           color: "var(--ink)",
           marginBottom: "2rem",
@@ -95,7 +95,7 @@ export default function Comments({ slug }: { slug: string }) {
               <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", marginBottom: "0.5rem" }}>
                 <span
                   style={{
-                    fontFamily: "var(--font-dm-sans)",
+                    fontFamily: "var(--font-util)",
                     fontSize: "0.8rem",
                     fontWeight: 500,
                     color: "var(--ink)",
@@ -105,9 +105,9 @@ export default function Comments({ slug }: { slug: string }) {
                 </span>
                 <span
                   style={{
-                    fontFamily: "var(--font-dm-sans)",
+                    fontFamily: "var(--font-util)",
                     fontSize: "0.65rem",
-                    color: "var(--ink-muted)",
+                    color: "var(--slate)",
                     letterSpacing: "0.05em",
                   }}
                 >
@@ -116,7 +116,7 @@ export default function Comments({ slug }: { slug: string }) {
               </div>
               <p
                 style={{
-                  fontFamily: "var(--font-cormorant)",
+                  fontFamily: "var(--font-display)",
                   fontSize: "1.1rem",
                   lineHeight: 1.7,
                   color: "var(--ink)",
@@ -142,10 +142,10 @@ export default function Comments({ slug }: { slug: string }) {
             maxLength={100}
             style={{
               flex: "1 1 200px",
-              fontFamily: "var(--font-dm-sans)",
+              fontFamily: "var(--font-util)",
               fontSize: "0.8rem",
               padding: "0.75rem 1rem",
-              border: "1px solid rgba(26,26,24,0.12)",
+              border: "1px solid var(--line)",
               borderRadius: "2px",
               backgroundColor: "transparent",
               color: "var(--ink)",
@@ -160,10 +160,10 @@ export default function Comments({ slug }: { slug: string }) {
             maxLength={255}
             style={{
               flex: "1 1 200px",
-              fontFamily: "var(--font-dm-sans)",
+              fontFamily: "var(--font-util)",
               fontSize: "0.8rem",
               padding: "0.75rem 1rem",
-              border: "1px solid rgba(26,26,24,0.12)",
+              border: "1px solid var(--line)",
               borderRadius: "2px",
               backgroundColor: "transparent",
               color: "var(--ink)",
@@ -179,10 +179,10 @@ export default function Comments({ slug }: { slug: string }) {
           maxLength={5000}
           rows={4}
           style={{
-            fontFamily: "var(--font-cormorant)",
+            fontFamily: "var(--font-display)",
             fontSize: "1.05rem",
             padding: "0.75rem 1rem",
-            border: "1px solid rgba(26,26,24,0.12)",
+            border: "1px solid var(--line)",
             borderRadius: "2px",
             backgroundColor: "transparent",
             color: "var(--ink)",
@@ -193,13 +193,13 @@ export default function Comments({ slug }: { slug: string }) {
         />
 
         {status === "error" && (
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.75rem", color: "#c44" }}>
+          <p style={{ fontFamily: "var(--font-util)", fontSize: "0.75rem", color: "#c44" }}>
             {errorMsg}
           </p>
         )}
 
         {status === "sent" && (
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "0.75rem", color: "var(--accent)" }}>
+          <p style={{ fontFamily: "var(--font-util)", fontSize: "0.75rem", color: "var(--assassin)" }}>
             Comment posted.
           </p>
         )}
@@ -209,7 +209,7 @@ export default function Comments({ slug }: { slug: string }) {
           disabled={status === "sending"}
           style={{
             alignSelf: "flex-start",
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-util)",
             fontSize: "0.7rem",
             letterSpacing: "0.15em",
             textTransform: "uppercase",

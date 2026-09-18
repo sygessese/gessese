@@ -27,9 +27,9 @@ export default function PostPage() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--cream)",
+        backgroundColor: "var(--paper)",
         padding: "10rem 2.5rem 8rem",
-        maxWidth: "640px",
+        maxWidth: "720px",
         margin: "0 auto",
       }}
     >
@@ -42,29 +42,29 @@ export default function PostPage() {
         <Link
           href="/writing"
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-util)",
             fontSize: "0.7rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
-            color: "var(--ink-muted)",
+            color: "var(--slate)",
             textDecoration: "none",
             display: "inline-block",
             marginBottom: "4rem",
             transition: "color 0.2s ease",
           }}
-          onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--accent)")}
-          onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--ink-muted)")}
+          onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--assassin)")}
+          onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "var(--slate)")}
         >
           ← Writing
         </Link>
 
-        {/* Date */}
+        {/* Date — the one red on this view */}
         <p
           style={{
-            fontFamily: "var(--font-dm-sans)",
+            fontFamily: "var(--font-util)",
             fontSize: "0.7rem",
-            letterSpacing: "0.12em",
-            color: "var(--ink-muted)",
+            letterSpacing: "0.14em",
+            color: "var(--assassin)",
             textTransform: "uppercase",
             marginBottom: "1rem",
           }}
@@ -79,13 +79,14 @@ export default function PostPage() {
         {/* Title */}
         <h1
           style={{
-            fontFamily: "var(--font-cormorant)",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
-            fontWeight: 400,
+            fontWeight: 500,
             fontStyle: "italic",
             lineHeight: 1.1,
             color: "var(--ink)",
-            marginBottom: "4rem",
+            marginBottom: "2.5rem",
+            fontVariationSettings: '"opsz" 36',
           }}
         >
           {post.title}
@@ -100,7 +101,7 @@ export default function PostPage() {
                   key={i}
                   style={{
                     border: "none",
-                    borderTop: "1px solid rgba(26,26,24,0.15)",
+                    borderTop: "1px solid var(--line)",
                     margin: "1rem 0",
                   }}
                 />
@@ -110,10 +111,10 @@ export default function PostPage() {
               <p
                 key={i}
                 style={{
-                  fontFamily: "var(--font-cormorant)",
-                  fontSize: "clamp(1.1rem, 2vw, 1.3rem)",
+                  fontFamily: "var(--font-read)",
+                  fontSize: "clamp(1.05rem, 1.6vw, 1.2rem)",
                   fontWeight: 400,
-                  lineHeight: 1.8,
+                  lineHeight: 1.7,
                   color: "var(--ink)",
                 }}
               >
