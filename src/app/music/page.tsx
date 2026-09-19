@@ -15,7 +15,7 @@ const ease = "easeInOut" as const;
 
 const cap: React.CSSProperties = {
   fontFamily: "var(--font-util)",
-  fontSize: "0.7rem",
+  fontSize: "clamp(0.6rem, 1.4vw, 0.7rem)",
   fontWeight: 400,
   letterSpacing: "0.16em",
   textTransform: "uppercase",
@@ -27,12 +27,12 @@ const SPOTIFY_ARTIST = "";
 const spotifyId = SPOTIFY_ARTIST.split("/artist/").pop()?.split("?")[0] ?? "";
 
 /* the photograph starts under the text column and dissolves across a long stretch,
-   so the words sit on the ghost of the picture rather than beside it */
-const fade = "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.08) 3%, rgba(0,0,0,0.45) 13%, black 27%, black 100%)";
+   so the words sit on the ghost of the picture rather than beside it.
+   The gradient itself lives in globals.css as --bleed / --bleed-down. */
 
 export default function Music() {
   return (
-    <main style={{ minHeight: "100vh", backgroundColor: "var(--paper)", padding: "7.5rem 2.5rem 5rem", maxWidth: "1400px", margin: "0 auto" }}>
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--paper)", padding: "clamp(5.25rem, 9.6vw, 7.5rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 6.5vw, 5rem)", maxWidth: "1400px", margin: "0 auto" }}>
       {/* the rule */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -45,7 +45,7 @@ export default function Music() {
       </motion.div>
 
       {/* the band — words left, photograph bleeding in from the right */}
-      <div style={{ position: "relative", minHeight: "clamp(416px, 80vh, 873px)", marginTop: "1.5rem" }}>
+      <div className="band" style={{ position: "relative", marginTop: "1.5rem" }}>
         {/* the photograph — behind, starting a third of the way in */}
         <motion.figure
           initial={{ opacity: 0 }}
@@ -53,15 +53,10 @@ export default function Music() {
           transition={{ duration: 1.3, ease }}
           style={{
             position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: "32%",
-            right: 0,
             margin: 0,
             overflow: "hidden",
-            WebkitMaskImage: fade,
-            maskImage: fade,
           }}
+          className="band-photo"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -72,7 +67,7 @@ export default function Music() {
         </motion.figure>
 
         {/* the words — in front, on the left half */}
-        <div style={{ position: "relative", zIndex: 1, width: "min(100%, 46%)", minWidth: "320px", display: "flex", flexDirection: "column", paddingBottom: "1rem" }}>
+        <div className="band-words" style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", paddingBottom: "1rem" }}>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,7 +91,7 @@ export default function Music() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.8 }}
-            style={{ borderTop: "1px solid var(--line)", paddingTop: "0.9rem", marginBottom: "2.5rem" }}
+            className="band-listen"
           >
             <p style={{ ...cap, marginBottom: "0.75rem" }}>Listen</p>
             {spotifyId ? (
@@ -118,7 +113,7 @@ export default function Music() {
           </motion.div>
 
           {/* platforms */}
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="band-links" style={{ display: "flex", flexDirection: "column" }}>
             {platforms.map((p, i) => (
               <motion.a
                 key={p.name}

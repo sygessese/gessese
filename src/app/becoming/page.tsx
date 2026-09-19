@@ -7,7 +7,7 @@ const ease = "easeInOut" as const;
 
 const cap: React.CSSProperties = {
   fontFamily: "var(--font-util)",
-  fontSize: "0.7rem",
+  fontSize: "clamp(0.6rem, 1.4vw, 0.7rem)",
   fontWeight: 400,
   letterSpacing: "0.16em",
   textTransform: "uppercase",
@@ -16,7 +16,7 @@ const cap: React.CSSProperties = {
 
 export default function Becoming() {
   return (
-    <main style={{ minHeight: "100vh", backgroundColor: "var(--paper)", padding: "7.5rem 2.5rem 5rem", maxWidth: "1400px", margin: "0 auto" }}>
+    <main style={{ minHeight: "100vh", backgroundColor: "var(--paper)", padding: "clamp(5.25rem, 9.6vw, 7.5rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 6.5vw, 5rem)", maxWidth: "1400px", margin: "0 auto" }}>
       {/* the rule */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -30,12 +30,12 @@ export default function Becoming() {
 
       {/* title + excerpt */}
       <div
+        className="bloom-head"
         style={{
           display: "grid",
-          gridTemplateColumns: "minmax(0, 5fr) minmax(0, 7fr)",
-          gap: "4rem",
+          gap: "clamp(1.75rem, 5.2vw, 4rem)",
           alignItems: "end",
-          padding: "6rem 0 5rem",
+          padding: "clamp(3.25rem, 7vw, 6rem) 0 clamp(2.75rem, 6vw, 5rem)",
         }}
       >
         <div>
@@ -66,6 +66,7 @@ export default function Becoming() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.9, ease }}
+          className="bloom-quote"
           style={{
             margin: 0,
             fontFamily: "var(--font-read)",
@@ -74,8 +75,7 @@ export default function Becoming() {
             fontStyle: "italic",
             lineHeight: 1.55,
             color: "var(--ink)",
-            maxWidth: "34ch",
-            justifySelf: "end",
+            maxWidth: "min(34ch, 100%)",
           }}
         >
           There is a version of me that lives at the edge of every decision I almost made — I am learning to stop visiting her.
@@ -89,11 +89,11 @@ export default function Becoming() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.8 }}
+        className="pre-row"
         style={{
           display: "grid",
-          gridTemplateColumns: "minmax(200px, 3fr) minmax(0, 9fr) 2rem",
           alignItems: "baseline",
-          gap: "2rem",
+          gap: "clamp(0.75rem, 2.6vw, 2rem)",
           padding: "1.7rem 0",
           borderTop: "1px solid var(--line)",
           borderBottom: "1px solid var(--line)",

@@ -9,6 +9,10 @@
   --mist: #F1F4F7;
   --assassin: #C30D2A;
 
+  /* the Music bleed, the same stops turned through 90 degrees */
+  --bleed: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.08) 3%, rgba(0,0,0,0.45) 13%, black 27%, black 100%);
+  --bleed-down: linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.14) 80%, transparent 97%);
+
   /* legacy aliases — old names still resolve while pages migrate */
   --cream: var(--paper);
   --ink-muted: var(--slate);
@@ -84,7 +88,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2.5rem;
+  padding: 1.5rem clamp(1.25rem, 3.2vw, 2.5rem);
   background-color: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -93,7 +97,7 @@ body {
 .nav-name {
   /* Archivo 500 — the name as one of the labels; the hero carries the name */
   font-family: var(--font-util);
-  font-size: 0.7rem;
+  font-size: clamp(0.62rem, 1.4vw, 0.7rem);
   font-weight: 500;
   letter-spacing: 0.2em;
   color: var(--ink);
@@ -112,7 +116,7 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: clamp(1.1rem, 3.3vw, 2.5rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -131,45 +135,120 @@ body {
 /* Mobile nav — name stacked column on left, links swipeable row on right */
 @media (max-width: 640px) {
   .site-nav {
-    padding: 0.75rem 0 0.75rem 1.25rem;
-    align-items: center;
-  }
-  .nav-name {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    line-height: 1.15;
+    padding: 0.9rem clamp(1.25rem, 3.2vw, 2.5rem);
   }
   .nav-name-full {
-    display: none;
+    display: inline;
   }
   .nav-name-stacked {
-    display: flex;
-    flex-direction: column;
-  }
-  .nav-links {
-    gap: 1.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-left: 1.5rem;
-    padding-right: 3rem;
-    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-  }
-  .nav-links::-webkit-scrollbar {
     display: none;
   }
-  .nav-links li {
-    flex-shrink: 0;
+  .nav-link {
+    letter-spacing: 0.1em;
   }
 }
 
-/* ── Home · rooms ───────────────────────────── */
+/* ── Home · rooms ─────────────────────────────
+   The 42% floor caps it at two columns however wide the page gets;
+   the 18rem floor drops it to one when a column would be cramped.
+   No breakpoint — the grid reads the space it is given.            */
 .rooms-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(42%, 18rem)), 1fr));
+  column-gap: clamp(2rem, 6.5vw, 5rem);
+  margin-top: clamp(2.25rem, 5.2vw, 4rem);
 }
-@media (max-width: 720px) {
-  .rooms-grid {
+
+/* ── Home · rows ──────────────────────────────
+   Left to themselves the rows fold one at a time, as each sub-label
+   runs out of room, which reads as ragged. Below 34rem they all fold. */
+@media (max-width: 34rem) {
+  .room-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ── Bloom ────────────────────────────────────
+   Title and excerpt hold their 5/7 split while both fit; below that the
+   head folds and the excerpt returns to the margin.                  */
+.bloom-head {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+.pre-row {
+  grid-template-columns: minmax(200px, 3fr) minmax(0, 9fr) 2rem;
+}
+.bloom-quote {
+  justify-self: end;
+}
+@media (max-width: 46rem) {
+  .bloom-head {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .bloom-quote {
+    justify-self: start;
+  }
+  .pre-row {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+/* ── About ────────────────────────────────────
+   The portrait stays nested beside the text at every width.          */
+.about-grid {
+  grid-template-columns: 1fr 2fr;
+}
+
+/* ── Music ────────────────────────────────────
+   The one composition that cannot scale: at 46% of a phone the words
+   have ~150px, which is narrower than the word "SoundCloud". Below
+   860px the same bleed turns through 90° — photograph above, the
+   title in its fade — instead of beside.                            */
+.band {
+  min-height: clamp(416px, 80vh, 873px);
+}
+.band-photo {
+  top: 0;
+  bottom: 0;
+  left: 32%;
+  right: 0;
+  -webkit-mask-image: var(--bleed);
+  mask-image: var(--bleed);
+}
+.band-words {
+  width: min(100%, 46%);
+  min-width: 20rem;
+}
+.band-listen {
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 860px) {
+  .band {
+    min-height: 0;
+  }
+  .band-photo {
+    left: 0;
+    bottom: auto;
+    height: clamp(360px, 66vh, 640px);
+    -webkit-mask-image: var(--bleed-down);
+    mask-image: var(--bleed-down);
+  }
+  .band-words {
+    width: 100%;
+    min-width: 0;
+    padding-top: clamp(210px, 29vh, 330px);
+  }
+  /* the links sit in the photograph; the player follows underneath it */
+  .band-links {
+    order: 1;
+  }
+  .band-listen {
+    order: 2;
+    margin-top: 2.25rem;
+    margin-bottom: 0;
+    /* the links already close with a rule — don't draw a second one */
+    border-top: 0;
+    padding-top: 0;
   }
 }

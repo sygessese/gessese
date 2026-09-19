@@ -32,7 +32,7 @@ const fadeUp = {
 
 const cap: React.CSSProperties = {
   fontFamily: "var(--font-util)",
-  fontSize: "0.7rem",
+  fontSize: "clamp(0.6rem, 1.4vw, 0.7rem)",
   fontWeight: 400,
   letterSpacing: "0.16em",
   textTransform: "uppercase",
@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <>
-      <main style={{ minHeight: "100vh", padding: "7.5rem 2.5rem 4rem", maxWidth: "1400px", margin: "0 auto" }}>
+      <main style={{ minHeight: "100vh", padding: "clamp(5.25rem, 9.6vw, 7.5rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 5.2vw, 4rem)", maxWidth: "1400px", margin: "0 auto" }}>
         {/* the name */}
         {(
           <motion.h1
@@ -78,7 +78,7 @@ export default function Home() {
             transition={{ duration: 0.9, ease }}
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.6rem, 8.6vw, 8.6rem)",
+              fontSize: "clamp(3rem, 8.6vw, 8.6rem)",
               fontWeight: 500,
               lineHeight: 0.95,
               letterSpacing: "-0.015em",
@@ -125,7 +125,7 @@ export default function Home() {
           style={{
             position: "relative",
             margin: "1.5rem 0 0",
-            height: "clamp(320px, 60vh, 720px)",
+            height: "clamp(260px, 60vh, 720px)",
             backgroundColor: "var(--mist)",
             overflow: "hidden",
           }}
@@ -143,32 +143,31 @@ export default function Home() {
 
         {/* ── the rooms · grid ─────────────────────────────── */}
         {(
-          <div
-            className="rooms-grid"
-            style={{ display: "grid", columnGap: "5rem", marginTop: "4rem" }}
-          >
+          <div className="rooms-grid" style={{ display: "grid" }}>
             {rooms.map(({ href, label, sub }, i) => (
               <motion.div key={href} custom={i} initial="hidden" animate="visible" variants={fadeUp}>
                 <Link href={href} style={{ textDecoration: "none", display: "block" }} onClick={() => track("section_door_click", { section: label.toLowerCase() })}>
                   <div
                     {...hoverRed}
+                    className="room-row"
                     style={{
                       position: "relative",
                       display: "flex",
                       alignItems: "baseline",
-                      gap: "1.25rem",
-                      padding: "1.5rem 2rem 1.5rem 0",
+                      flexWrap: "wrap",
+                      gap: "0.35rem 1.25rem",
+                      padding: "clamp(1.15rem, 2vw, 1.5rem) 2rem clamp(1.15rem, 2vw, 1.5rem) 0",
                       borderTop: "1px solid var(--line)",
                       cursor: "pointer",
                     }}
                   >
                     <span
                       className="room-label"
-                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 3.1vw, 2.9rem)", fontWeight: 500, lineHeight: 1, color: "var(--ink)", transition: "color 0.2s ease", minWidth: "150px" }}
+                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 3.1vw, 2.9rem)", fontWeight: 500, lineHeight: 1, color: "var(--ink)", transition: "color 0.2s ease", minWidth: "min(150px, 100%)" }}
                     >
                       {label}
                     </span>
-                    <span style={{ ...cap, fontSize: "0.76rem", letterSpacing: "0.1em", textTransform: "lowercase", whiteSpace: "nowrap" }}>{sub}</span>
+                    <span style={{ ...cap, fontSize: "clamp(0.68rem, 1.5vw, 0.76rem)", letterSpacing: "0.1em", textTransform: "lowercase" }}>{sub}</span>
                     <span className="room-arrow" style={{ position: "absolute", right: 0, color: "var(--assassin)", opacity: 0, transition: "opacity 0.2s ease" }}>
                       →
                     </span>
