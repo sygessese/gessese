@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { track } from "@vercel/analytics";
+import BookCover from "@/components/BookCover";
 
 const ease = "easeInOut" as const;
 
@@ -59,81 +60,115 @@ export default function Becoming() {
         <span style={cap}>2018 — 2026</span>
       </motion.div>
 
-      {/* title + excerpt */}
-      <div
-        className="bloom-head"
+      {/* title */}
+      <motion.h1
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, duration: 1, ease }}
         style={{
-          display: "grid",
-          gap: "clamp(0.75rem, 1.8vw, 1.5rem)",
-          padding: "clamp(2.75rem, 6vw, 5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem)",
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(2.6rem, 5.8vw, 5.25rem)",
+          fontWeight: 500,
+          fontStyle: "italic",
+          lineHeight: 1.02,
+          letterSpacing: "-0.02em",
+          color: "var(--ink)",
+          marginTop: "clamp(1.5rem, 3vw, 2.5rem)",
+          marginBottom: 0,
+          marginLeft: "-0.02em",
+          textWrap: "balance",
         }}
       >
-        <div>
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 1, ease }}
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.75rem, 6.6vw, 6rem)",
-              fontWeight: 500,
-              fontStyle: "italic",
-              lineHeight: 1.02,
-              letterSpacing: "-0.02em",
-              color: "var(--ink)",
-              marginBottom: 0,
-              marginLeft: "-0.02em",
-              textWrap: "balance",
-            }}
-          >
-            The Distance I Mistook For Love
-          </motion.h1>
-        </div>
+        The Distance I Mistook For Love
+      </motion.h1>
 
-        <motion.blockquote
+      <motion.a
+        href="#preorder"
+        onClick={() => track("hero_waitlist_click")}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="hero-cta"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.55rem",
+          width: "fit-content",
+          marginTop: "1.15rem",
+          fontFamily: "var(--font-util)",
+          fontSize: "clamp(0.62rem, 1.4vw, 0.72rem)",
+          fontWeight: 500,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "var(--assassin)",
+          textDecoration: "none",
+        }}
+      >
+        join the waitlist
+        <span aria-hidden="true" className="hero-cta__arrow">↓</span>
+      </motion.a>
+
+      {/* the cover + a sample poem */}
+      <div className="poem-row">
+        <motion.div
+          className="book-col"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.9, ease }}
+        >
+          <BookCover />
+        </motion.div>
+
+        <motion.div
+          className="poem-col"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.9, ease }}
-          className="bloom-quote"
-          style={{
-            position: "relative",
-            paddingLeft: "clamp(2.25rem, 4vw, 3.5rem)",
-            fontFamily: "var(--font-read)",
-            fontSize: "clamp(1.25rem, 1.9vw, 1.6rem)",
-            fontWeight: 400,
-            fontStyle: "italic",
-            lineHeight: 1.55,
-            color: "var(--ink)",
-            maxWidth: "min(48ch, 100%)",
-          }}
+          transition={{ delay: 0.5, duration: 0.9, ease }}
+          style={{ display: "grid", gap: "clamp(0.8rem, 1.6vw, 1.15rem)" }}
         >
-          <span
-            aria-hidden="true"
+          <span style={cap}>from the collection</span>
+          <blockquote
             style={{
-              position: "absolute",
-              left: 0,
-              top: "-0.12em",
+              margin: 0,
+              position: "relative",
+              paddingLeft: "clamp(2.25rem, 4vw, 3.5rem)",
               fontFamily: "var(--font-read)",
+              fontSize: "clamp(1.25rem, 1.9vw, 1.6rem)",
+              fontWeight: 400,
               fontStyle: "italic",
-              fontSize: "clamp(3rem, 6vw, 5rem)",
-              lineHeight: 1,
-              color: "color-mix(in srgb, var(--slate) 52%, var(--paper))",
-              userSelect: "none",
+              lineHeight: 1.55,
+              color: "var(--ink)",
+              maxWidth: "min(48ch, 100%)",
             }}
           >
-            &ldquo;
-          </span>
-          {[
-            "I stayed longer than I should have",
-            "trying harder than I needed to",
-            "after all, I am my mother's daughter",
-            "hoping to save my father in you",
-          ].map((line) => (
-            <span key={line} style={{ display: "block" }}>
-              {line}
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: 0,
+                top: "-0.12em",
+                fontFamily: "var(--font-read)",
+                fontStyle: "italic",
+                fontSize: "clamp(3rem, 6vw, 5rem)",
+                lineHeight: 1,
+                color: "color-mix(in srgb, var(--slate) 52%, var(--paper))",
+                userSelect: "none",
+              }}
+            >
+              &ldquo;
             </span>
-          ))}
-        </motion.blockquote>
+            {[
+              "I stayed longer than I should have",
+              "trying harder than I needed to",
+              "after all, I am my mother's daughter",
+              "hoping to save my father in you",
+            ].map((line) => (
+              <span key={line} style={{ display: "block" }}>
+                {line}
+              </span>
+            ))}
+          </blockquote>
+        </motion.div>
       </div>
 
       {/* the buy placeholder — inactive until launch day */}
@@ -147,7 +182,7 @@ export default function Becoming() {
           display: "grid",
           alignItems: "baseline",
           gap: "clamp(0.5rem, 2.6vw, 2rem)",
-          padding: "1.7rem 0",
+          padding: "1.25rem 0",
           borderTop: "1px solid var(--line)",
           borderBottom: "1px solid var(--line)",
           cursor: "default",
@@ -167,7 +202,7 @@ export default function Becoming() {
           Available Soon
         </span>
         <span style={{ ...cap, letterSpacing: "0.1em", textTransform: "lowercase", color: "color-mix(in srgb, var(--slate) 55%, var(--paper))" }}>
-          coming winter 2026
+          paperback · coming winter 2026
         </span>
       </motion.div>
 
@@ -179,8 +214,8 @@ export default function Becoming() {
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.8, ease }}
         style={{
-          scrollMarginTop: "6rem",
-          padding: "clamp(2.5rem, 5vw, 4rem) 0 clamp(1rem, 3vw, 2rem)",
+          scrollMarginTop: "5rem",
+          padding: "clamp(1.75rem, 3.5vw, 2.75rem) 0 clamp(1rem, 3vw, 2rem)",
           display: "grid",
           gap: "clamp(1.5rem, 3.5vw, 2.5rem)",
           maxWidth: "min(52ch, 100%)",
