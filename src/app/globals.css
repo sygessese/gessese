@@ -9,9 +9,8 @@
   --mist: #F1F4F7;
   --assassin: #C30D2A;
 
-  /* the Music bleed, the same stops turned through 90 degrees */
+  /* the Music bleed */
   --bleed: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.08) 3%, rgba(0,0,0,0.45) 13%, black 27%, black 100%);
-  --bleed-down: linear-gradient(to bottom, black 0%, black 30%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.14) 80%, transparent 97%);
 
   /* legacy aliases — old names still resolve while pages migrate */
   --cream: var(--paper);
@@ -238,38 +237,31 @@ body {
   margin-bottom: 2.5rem;
 }
 
-/* Side by side, the words take 46% and the photograph starts at 32%, so
-   the two overlap by design and the bleed hides the seam. That only works
-   once the fade has finished before the words end. Below 1100px it has
-   not, and the player sits on a still-solid part of the picture — so the
-   bleed turns through 90 degrees instead: photograph above, title in its
-   fade, links in it, player underneath.                                */
+/* The composition does not change on a phone — the photograph still
+   bleeds in from the right at 32% and the words still sit in its fade.
+   Only two things give way: the words take the full width instead of
+   46%, and the player leaves the picture, dropping below it on its own
+   opaque ground. The band stops reserving 80vh so the page ends where
+   the content does.                                                   */
 @media (max-width: 1100px) {
   .band {
     min-height: 0;
   }
-  .band-photo {
-    left: 0;
-    bottom: auto;
-    height: clamp(320px, 54vh, 540px);
-    -webkit-mask-image: var(--bleed-down);
-    mask-image: var(--bleed-down);
-  }
   .band-words {
     width: 100%;
     min-width: 0;
-    padding-top: clamp(140px, 21vh, 250px);
   }
-  /* the links sit in the photograph; the player follows underneath it */
   .band-links {
     order: 1;
   }
   .band-listen {
     order: 2;
-    margin-top: 2.25rem;
-    margin-bottom: 0;
-    /* the links already close with a rule — don't draw a second one */
-    border-top: 0;
-    padding-top: 0;
+    position: relative;
+    background: var(--paper);
+    margin: 2.25rem 0 -1rem;
+    /* the negative margin swallows the column's own bottom padding, so the
+       opaque ground reaches the foot of the band and no sliver of the
+       photograph reappears under the player */
+    padding-bottom: 1rem;
   }
 }
