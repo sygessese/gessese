@@ -191,11 +191,12 @@ body {
   grid-template-columns: minmax(200px, auto) minmax(0, 1fr);
 }
 .bloom-quote {
-  justify-self: end;
+  justify-self: start;
+  margin: 0 0 0 50%;
 }
 @media (max-width: 46rem) {
   .bloom-quote {
-    justify-self: start;
+    margin: 0;
   }
   .pre-row {
     grid-template-columns: 1fr;

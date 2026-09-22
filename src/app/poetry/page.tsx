@@ -64,8 +64,8 @@ export default function Becoming() {
         className="bloom-head"
         style={{
           display: "grid",
-          gap: "clamp(1.5rem, 3vw, 2.5rem)",
-          padding: "clamp(2.75rem, 6vw, 5rem) 0 clamp(2.25rem, 5vw, 4rem)",
+          gap: "clamp(0.75rem, 1.8vw, 1.5rem)",
+          padding: "clamp(2.75rem, 6vw, 5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem)",
         }}
       >
         <div>
@@ -81,16 +81,13 @@ export default function Becoming() {
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
               color: "var(--ink)",
-              marginBottom: "1rem",
+              marginBottom: 0,
               marginLeft: "-0.02em",
               textWrap: "balance",
             }}
           >
             The Distance I Mistook For Love
           </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} style={cap}>
-            Selam Gessese
-          </motion.p>
         </div>
 
         <motion.blockquote
@@ -99,27 +96,28 @@ export default function Becoming() {
           transition={{ delay: 0.45, duration: 0.9, ease }}
           className="bloom-quote"
           style={{
-            margin: 0,
+            position: "relative",
+            paddingLeft: "clamp(2.25rem, 4vw, 3.5rem)",
             fontFamily: "var(--font-read)",
             fontSize: "clamp(1.25rem, 1.9vw, 1.6rem)",
             fontWeight: 400,
             fontStyle: "italic",
             lineHeight: 1.55,
             color: "var(--ink)",
-            maxWidth: "min(42ch, 100%)",
+            maxWidth: "min(48ch, 100%)",
           }}
         >
           <span
             aria-hidden="true"
             style={{
-              display: "block",
+              position: "absolute",
+              left: 0,
+              top: "-0.12em",
               fontFamily: "var(--font-read)",
               fontStyle: "italic",
-              fontSize: "clamp(5rem, 9vw, 8.5rem)",
-              lineHeight: 0.62,
-              height: "0.5em",
+              fontSize: "clamp(3rem, 6vw, 5rem)",
+              lineHeight: 1,
               color: "color-mix(in srgb, var(--slate) 52%, var(--paper))",
-              marginLeft: "-0.04em",
               userSelect: "none",
             }}
           >
@@ -185,7 +183,7 @@ export default function Becoming() {
           padding: "clamp(2.5rem, 5vw, 4rem) 0 clamp(1rem, 3vw, 2rem)",
           display: "grid",
           gap: "clamp(1.5rem, 3.5vw, 2.5rem)",
-          maxWidth: "min(58rem, 100%)",
+          maxWidth: "min(52ch, 100%)",
         }}
       >
         <div style={{ display: "grid", gap: "1rem" }}>
