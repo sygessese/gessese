@@ -80,7 +80,7 @@ export default function Music() {
               letterSpacing: "-0.01em",
               color: "var(--ink)",
               marginLeft: "-0.03em",
-              marginBottom: "3rem",
+              marginBottom: "clamp(1.4rem, 4vw, 3rem)",
             }}
           >
             Music
@@ -128,7 +128,7 @@ export default function Music() {
                   display: "flex",
                   alignItems: "baseline",
                   justifyContent: "space-between",
-                  padding: "1.05rem 0",
+                  padding: "clamp(0.8rem, 1.8vw, 1.05rem) 0",
                   borderTop: "1px solid var(--line)",
                   textDecoration: "none",
                   color: "var(--ink)",

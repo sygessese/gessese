@@ -116,6 +116,8 @@ body {
 
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.3rem;
   gap: clamp(1.1rem, 3.3vw, 2.5rem);
   list-style: none;
   margin: 0;
@@ -136,6 +138,8 @@ body {
 @media (max-width: 640px) {
   .site-nav {
     padding: 0.9rem clamp(1.25rem, 3.2vw, 2.5rem);
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
   }
   .nav-name-full {
     display: inline;
@@ -143,8 +147,12 @@ body {
   .nav-name-stacked {
     display: none;
   }
+  .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
   .nav-link {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 }
 
@@ -159,12 +167,18 @@ body {
 }
 
 /* ── Home · rows ──────────────────────────────
-   Left to themselves the rows fold one at a time, as each sub-label
-   runs out of room, which reads as ragged. Below 34rem they all fold. */
-@media (max-width: 34rem) {
+   Label and detail stay on one line; the detail shrinks to fit rather
+   than wrapping. Below 22.5rem there is no size that fits, so it folds. */
+.room-sub {
+  white-space: nowrap;
+}
+@media (max-width: 22.5rem) {
   .room-row {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.3rem;
+  }
+  .room-sub {
+    white-space: normal;
   }
 }
 
@@ -230,14 +244,14 @@ body {
   .band-photo {
     left: 0;
     bottom: auto;
-    height: clamp(360px, 66vh, 640px);
+    height: clamp(320px, 54vh, 540px);
     -webkit-mask-image: var(--bleed-down);
     mask-image: var(--bleed-down);
   }
   .band-words {
     width: 100%;
     min-width: 0;
-    padding-top: clamp(210px, 29vh, 330px);
+    padding-top: clamp(140px, 21vh, 250px);
   }
   /* the links sit in the photograph; the player follows underneath it */
   .band-links {

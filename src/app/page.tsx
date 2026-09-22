@@ -154,20 +154,19 @@ export default function Home() {
                       position: "relative",
                       display: "flex",
                       alignItems: "baseline",
-                      flexWrap: "wrap",
-                      gap: "0.35rem 1.25rem",
-                      padding: "clamp(1.15rem, 2vw, 1.5rem) 2rem clamp(1.15rem, 2vw, 1.5rem) 0",
+                      gap: "clamp(0.6rem, 1.6vw, 1.25rem)",
+                      padding: "clamp(1.15rem, 2vw, 1.5rem) clamp(0rem, 2.8vw, 2rem) clamp(1.15rem, 2vw, 1.5rem) 0",
                       borderTop: "1px solid var(--line)",
                       cursor: "pointer",
                     }}
                   >
                     <span
                       className="room-label"
-                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 3.1vw, 2.9rem)", fontWeight: 500, lineHeight: 1, color: "var(--ink)", transition: "color 0.2s ease", minWidth: "min(150px, 100%)" }}
+                      style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 3.1vw, 2.9rem)", fontWeight: 500, lineHeight: 1, color: "var(--ink)", transition: "color 0.2s ease", minWidth: "min(150px, 30vw)" }}
                     >
                       {label}
                     </span>
-                    <span style={{ ...cap, fontSize: "clamp(0.68rem, 1.5vw, 0.76rem)", letterSpacing: "0.1em", textTransform: "lowercase" }}>{sub}</span>
+                    <span style={{ ...cap, fontSize: "clamp(0.6rem, 1.5vw, 0.76rem)", letterSpacing: "0.1em", textTransform: "lowercase" }}>{sub}</span>
                     <span className="room-arrow" style={{ position: "absolute", right: 0, color: "var(--assassin)", opacity: 0, transition: "opacity 0.2s ease" }}>
                       →
                     </span>
