@@ -13,7 +13,7 @@ import type { Post } from "@/lib/posts";
 const rooms = [
   { href: "/writing", label: "Writing", sub: "essays · musings · brain dumps" },
   { href: "/music", label: "Music", sub: "streaming everywhere" },
-  { href: "/becoming", label: "Bloom", sub: "a poetry collection · preorder now" },
+  { href: "/poetry", label: "Poetry", sub: "a collection · releasing soon" },
   { href: "/work", label: "Work", sub: "things i've built" },
   { href: "/about", label: "About", sub: "the person behind the work" },
 ];
@@ -109,11 +109,11 @@ export default function Home() {
         >
           <span style={cap}>software engineer &nbsp;·&nbsp; writer &nbsp;·&nbsp; music producer</span>
           <Link
-            href="/becoming"
+            href="/poetry"
             style={{ ...cap, color: "var(--assassin)", textDecoration: "none" }}
-            onClick={() => track("section_door_click", { section: "bloom-rule" })}
+            onClick={() => track("section_door_click", { section: "poetry-rule" })}
           >
-            bloom · a poetry collection · preorder now
+            poetry · a collection · releasing soon
           </Link>
         </motion.div>
 

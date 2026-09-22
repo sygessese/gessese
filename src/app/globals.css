@@ -185,23 +185,20 @@ body {
    Title and excerpt hold their 5/7 split while both fit; below that the
    head folds and the excerpt returns to the margin.                  */
 .bloom-head {
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 .pre-row {
-  grid-template-columns: minmax(200px, 3fr) minmax(0, 9fr) 2rem;
+  grid-template-columns: minmax(200px, auto) minmax(0, 1fr);
 }
 .bloom-quote {
   justify-self: end;
 }
 @media (max-width: 46rem) {
-  .bloom-head {
-    grid-template-columns: minmax(0, 1fr);
-  }
   .bloom-quote {
     justify-self: start;
   }
   .pre-row {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr;
   }
 }
 
