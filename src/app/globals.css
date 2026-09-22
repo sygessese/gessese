@@ -9,6 +9,9 @@
   --mist: #F1F4F7;
   --assassin: #C30D2A;
 
+  /* the Music bleed */
+  --bleed: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.08) 3%, rgba(0,0,0,0.45) 13%, black 27%, black 100%);
+
   /* legacy aliases — old names still resolve while pages migrate */
   --cream: var(--paper);
   --ink-muted: var(--slate);
@@ -84,7 +87,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2.5rem;
+  padding: 1.5rem clamp(1.25rem, 3.2vw, 2.5rem);
   background-color: color-mix(in srgb, var(--paper) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -93,7 +96,7 @@ body {
 .nav-name {
   /* Archivo 500 — the name as one of the labels; the hero carries the name */
   font-family: var(--font-util);
-  font-size: 0.7rem;
+  font-size: clamp(0.62rem, 1.4vw, 0.7rem);
   font-weight: 500;
   letter-spacing: 0.2em;
   color: var(--ink);
@@ -112,7 +115,9 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  flex-wrap: wrap;
+  row-gap: 0.3rem;
+  gap: clamp(1.1rem, 3.3vw, 2.5rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -131,45 +136,265 @@ body {
 /* Mobile nav — name stacked column on left, links swipeable row on right */
 @media (max-width: 640px) {
   .site-nav {
-    padding: 0.75rem 0 0.75rem 1.25rem;
-    align-items: center;
-  }
-  .nav-name {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    line-height: 1.15;
+    padding: 0.9rem clamp(1.25rem, 3.2vw, 2.5rem);
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
   }
   .nav-name-full {
-    display: none;
+    display: inline;
   }
   .nav-name-stacked {
-    display: flex;
-    flex-direction: column;
-  }
-  .nav-links {
-    gap: 1.5rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-left: 1.5rem;
-    padding-right: 3rem;
-    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-  }
-  .nav-links::-webkit-scrollbar {
     display: none;
   }
-  .nav-links li {
-    flex-shrink: 0;
+  .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .nav-link {
+    letter-spacing: 0.08em;
   }
 }
 
-/* ── Home · rooms ───────────────────────────── */
+/* ── Home · rooms ─────────────────────────────
+   The 42% floor caps it at two columns however wide the page gets;
+   the 18rem floor drops it to one when a column would be cramped.
+   No breakpoint — the grid reads the space it is given.            */
 .rooms-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(42%, 18rem)), 1fr));
+  column-gap: clamp(2rem, 6.5vw, 5rem);
+  margin-top: clamp(2.25rem, 5.2vw, 4rem);
 }
-@media (max-width: 720px) {
-  .rooms-grid {
-    grid-template-columns: minmax(0, 1fr);
+
+/* ── Home · rows ──────────────────────────────
+   Label and detail stay on one line; the detail shrinks to fit rather
+   than wrapping. Below 22.5rem there is no size that fits, so it folds. */
+.room-sub {
+  white-space: nowrap;
+}
+@media (max-width: 22.5rem) {
+  .room-row {
+    flex-wrap: wrap;
+    row-gap: 0.3rem;
+  }
+  .room-sub {
+    white-space: normal;
+  }
+}
+
+/* ── Bloom ────────────────────────────────────
+   Title and excerpt hold their 5/7 split while both fit; below that the
+   head folds and the excerpt returns to the margin.                  */
+.bloom-head {
+  grid-template-columns: minmax(0, 1fr);
+}
+.pre-row {
+  grid-template-columns: minmax(200px, auto) minmax(0, 1fr);
+}
+/* the cover sits left, the sample poem to its right */
+.poem-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(1rem, 2.5vw, 2rem) 0 clamp(1.25rem, 3vw, 2.25rem);
+}
+.book-col {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+.poem-col {
+  flex: 0 1 30rem;
+  min-width: 18rem;
+  max-width: 32rem;
+}
+.hero-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.hero-cta__arrow {
+  transition: transform 0.3s ease;
+}
+.hero-cta:hover .hero-cta__arrow {
+  transform: translateY(3px);
+}
+@media (max-width: 46rem) {
+  .pre-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Book mockup — placeholder 3D paperback ── */
+.book-scene {
+  perspective: 1700px;
+  display: flex;
+  justify-content: center;
+}
+.book {
+  --bw: clamp(148px, 16vw, 200px);
+  --bh: calc(var(--bw) * 1.5);
+  --bt: 42px;
+  position: relative;
+  width: var(--bw);
+  height: var(--bh);
+  transform-style: preserve-3d;
+  transform: rotateX(2deg) rotateY(-15deg);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  filter: drop-shadow(-14px 18px 20px rgba(15, 17, 21, 0.22));
+}
+.book:hover {
+  transform: rotateX(4deg) rotateY(-32deg);
+}
+.book__face {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.book__front {
+  width: var(--bw);
+  height: var(--bh);
+  transform: translateZ(calc(var(--bt) / 2));
+  border-radius: 1px 4px 4px 1px;
+  background: linear-gradient(150deg, #f6f8fa 0%, #e6eaef 72%);
+  box-shadow: inset 0 0 0 1px rgba(20, 30, 45, 0.08),
+    inset 2px 0 9px rgba(70, 84, 102, 0.14);
+  overflow: hidden;
+}
+.book__spine {
+  width: var(--bt);
+  height: var(--bh);
+  transform-origin: left center;
+  transform: rotateY(-90deg) translateX(calc(var(--bt) / -2));
+  background: linear-gradient(90deg, #ccd3db 0%, #e4e9ee 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px 0 0 1px;
+}
+.book__spine-text {
+  transform: rotate(90deg);
+  white-space: nowrap;
+  font-family: var(--font-util);
+  font-size: 0.42rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a8492;
+}
+.book__pages {
+  width: var(--bt);
+  height: calc(var(--bh) - 6px);
+  top: 3px;
+  left: auto;
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(90deg) translateX(calc(var(--bt) / 2));
+  background: repeating-linear-gradient(
+    90deg,
+    #eef1f4 0,
+    #eef1f4 1px,
+    #cbd2da 1.5px,
+    #eef1f4 2.5px
+  );
+  border-radius: 0 2px 2px 0;
+}
+.book__cover {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: clamp(0.9rem, 2vw, 1.3rem);
+  color: #14171c;
+}
+.book__eyebrow {
+  font-family: var(--font-util);
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7c8593;
+}
+.book__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  margin-top: auto;
+}
+.book__rule {
+  width: 26px;
+  height: 2px;
+  background: var(--assassin);
+  margin: 0.7rem 0 0.55rem;
+}
+.book__author {
+  font-family: var(--font-util);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #5b6472;
+}
+
+/* ── About ────────────────────────────────────
+   The portrait stays nested beside the text at every width.          */
+.about-grid {
+  grid-template-columns: 1fr 2fr;
+}
+
+/* ── Music ────────────────────────────────────
+   The one composition that cannot scale: at 46% of a phone the words
+   have ~150px, which is narrower than the word "SoundCloud". Below
+   860px the same bleed turns through 90° — photograph above, the
+   title in its fade — instead of beside.                            */
+.band {
+  min-height: clamp(416px, 80vh, 873px);
+}
+.band-photo {
+  top: 0;
+  bottom: 0;
+  left: 32%;
+  right: 0;
+  -webkit-mask-image: var(--bleed);
+  mask-image: var(--bleed);
+}
+.band-words {
+  width: min(100%, 46%);
+  min-width: 20rem;
+}
+.band-listen {
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+/* The composition does not change on a phone — the photograph still
+   bleeds in from the right at 32% and the words still sit in its fade.
+   Only two things give way: the words take the full width instead of
+   46%, and the player leaves the picture, dropping below it on its own
+   opaque ground. The band stops reserving 80vh so the page ends where
+   the content does.                                                   */
+@media (max-width: 1100px) {
+  .band {
+    min-height: 0;
+  }
+  .band-words {
+    width: 100%;
+    min-width: 0;
+  }
+  .band-links {
+    order: 1;
+  }
+  .band-listen {
+    order: 2;
+    position: relative;
+    background: var(--paper);
+    margin: 2.25rem 0 -1rem;
+    /* the negative margin swallows the column's own bottom padding, so the
+       opaque ground reaches the foot of the band and no sliver of the
+       photograph reappears under the player */
+    padding-bottom: 1rem;
   }
 }

@@ -9,7 +9,7 @@ export default function About() {
       style={{
         minHeight: "100vh",
         backgroundColor: "var(--paper)",
-        padding: "10rem 2.5rem 6rem",
+        padding: "clamp(5.25rem, 13vw, 10rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 7.8vw, 6rem)",
         maxWidth: "720px",
         margin: "0 auto",
       }}
@@ -34,24 +34,33 @@ export default function About() {
 
         {/* Two column: image placeholder + text */}
         <div
+          className="about-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "3rem",
+            gap: "clamp(1rem, 3.9vw, 3rem)",
             alignItems: "start",
             marginBottom: "4rem",
           }}
         >
-          {/* Photo placeholder */}
-          <div
+          {/* Portrait — swap the src for any file in /public/photos */}
+          <figure
             style={{
+              margin: 0,
+              maxWidth: "100%",
               aspectRatio: "3/4",
               backgroundColor: "var(--mist)",
-              borderRadius: "2px",
+              overflow: "hidden",
             }}
-          />
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/photos/crossing.jpg"
+              alt="1st & Stewart, Seattle"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 40%", display: "block" }}
+            />
+          </figure>
 
-          <div>
+          <div style={{ minWidth: 0 }}>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

@@ -28,7 +28,7 @@ export default function PostPage() {
       style={{
         minHeight: "100vh",
         backgroundColor: "var(--paper)",
-        padding: "10rem 2.5rem 8rem",
+        padding: "clamp(5.25rem, 13vw, 10rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 10.4vw, 8rem)",
         maxWidth: "720px",
         margin: "0 auto",
       }}

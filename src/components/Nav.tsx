@@ -7,7 +7,7 @@ import { track } from "@vercel/analytics";
 const links = [
   { href: "/writing", label: "writing" },
   { href: "/music", label: "music" },
-  { href: "/becoming", label: "bloom" },
+  { href: "/poetry", label: "poetry" },
   { href: "/about", label: "about" },
 ];
 
