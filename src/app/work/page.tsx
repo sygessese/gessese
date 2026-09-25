@@ -27,7 +27,25 @@ const education: Entry[] = [
   },
 ];
 
-const languages = "English and Amharic (native), Spanish and Tigrinya (conversational)";
+const languages = [
+  { names: "English, Amharic", level: "Native" },
+  { names: "Spanish, Tigrinya", level: "Conversational" },
+];
+
+const nameStyle: React.CSSProperties = {
+  fontFamily: "var(--font-display)",
+  fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
+  fontWeight: 500,
+  color: "var(--ink)",
+};
+
+const metaStyle: React.CSSProperties = {
+  fontFamily: "var(--font-util)",
+  fontSize: "0.75rem",
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  color: "var(--slate)",
+};
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -63,22 +81,13 @@ function HairlineRow({ children, delay = 0 }: { children: React.ReactNode; delay
   );
 }
 
-// Name left, role right, on one line; folds to a stack on a phone (.work-row in globals.css).
+// Name and role in two left-aligned columns; folds to a stack on a phone (.work-row in globals.css).
 function EntryRow({ entry, delay }: { entry: Entry; delay: number }) {
   return (
     <HairlineRow delay={delay}>
       <div className="work-row">
-        <div style={{ display: "flex", alignItems: "baseline", gap: "0.9rem", flexShrink: 0 }}>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-              fontWeight: 500,
-              color: "var(--ink)",
-            }}
-          >
-            {entry.title}
-          </h2>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "0.9rem" }}>
+          <h2 style={nameStyle}>{entry.title}</h2>
           {entry.current && (
             <span
               style={{
@@ -94,33 +103,24 @@ function EntryRow({ entry, delay }: { entry: Entry; delay: number }) {
             </span>
           )}
         </div>
-        <p
-          className="work-meta"
-          style={{
-            fontFamily: "var(--font-util)",
-            fontSize: "0.75rem",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "var(--slate)",
-          }}
-        >
-          {entry.meta}
-        </p>
+        <div>
+          <p style={metaStyle}>{entry.meta}</p>
+          {entry.details && (
+            <p
+              style={{
+                fontFamily: "var(--font-read)",
+                fontSize: "0.95rem",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "var(--slate)",
+                marginTop: "0.4rem",
+              }}
+            >
+              {entry.details}
+            </p>
+          )}
+        </div>
       </div>
-      {entry.details && (
-        <p
-          style={{
-            fontFamily: "var(--font-read)",
-            fontSize: "0.95rem",
-            fontWeight: 400,
-            lineHeight: 1.65,
-            color: "var(--slate)",
-            marginTop: "0.4rem",
-          }}
-        >
-          {entry.details}
-        </p>
-      )}
     </HairlineRow>
   );
 }
@@ -189,17 +189,14 @@ export default function Work() {
       <motion.div {...fadeUp(0.3)}>
         <SectionLabel>Languages</SectionLabel>
         <HairlineRow delay={0.35}>
-          <p
-            style={{
-              fontFamily: "var(--font-read)",
-              fontSize: "1rem",
-              fontWeight: 400,
-              lineHeight: 1.65,
-              color: "var(--ink)",
-            }}
-          >
-            {languages}
-          </p>
+          <div className="work-row work-langs">
+            {languages.map((l) => (
+              <div key={l.level}>
+                <p style={nameStyle}>{l.names}</p>
+                <p style={{ ...metaStyle, marginTop: "0.4rem" }}>{l.level}</p>
+              </div>
+            ))}
+          </div>
         </HairlineRow>
         <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
