@@ -81,46 +81,36 @@ function HairlineRow({ children, delay = 0 }: { children: React.ReactNode; delay
   );
 }
 
-// Name and role in two left-aligned columns; folds to a stack on a phone (.work-row in globals.css).
+// Role sits right after the name on one line; folds under it on a phone (.work-row in globals.css).
 function EntryRow({ entry, delay }: { entry: Entry; delay: number }) {
   return (
     <HairlineRow delay={delay}>
       <div className="work-row">
-        <div style={{ display: "flex", alignItems: "baseline", gap: "0.9rem" }}>
-          <h2 style={nameStyle}>{entry.title}</h2>
+        <h2 style={nameStyle}>{entry.title}</h2>
+        <p style={metaStyle}>
+          {entry.meta}
           {entry.current && (
-            <span
-              style={{
-                fontFamily: "var(--font-util)",
-                fontSize: "0.65rem",
-                letterSpacing: "0.14em",
-                color: "var(--assassin)",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Current
-            </span>
+            <>
+              {" · "}
+              <span style={{ color: "var(--assassin)" }}>Current</span>
+            </>
           )}
-        </div>
-        <div>
-          <p style={metaStyle}>{entry.meta}</p>
-          {entry.details && (
-            <p
-              style={{
-                fontFamily: "var(--font-read)",
-                fontSize: "0.95rem",
-                fontWeight: 400,
-                lineHeight: 1.65,
-                color: "var(--slate)",
-                marginTop: "0.4rem",
-              }}
-            >
-              {entry.details}
-            </p>
-          )}
-        </div>
+        </p>
       </div>
+      {entry.details && (
+        <p
+          style={{
+            fontFamily: "var(--font-read)",
+            fontSize: "0.95rem",
+            fontWeight: 400,
+            lineHeight: 1.65,
+            color: "var(--slate)",
+            marginTop: "0.4rem",
+          }}
+        >
+          {entry.details}
+        </p>
+      )}
     </HairlineRow>
   );
 }
@@ -189,11 +179,11 @@ export default function Work() {
       <motion.div {...fadeUp(0.3)}>
         <SectionLabel>Languages</SectionLabel>
         <HairlineRow delay={0.35}>
-          <div className="work-row work-langs">
+          <div className="work-langs">
             {languages.map((l) => (
-              <div key={l.level}>
+              <div key={l.level} className="work-lang">
                 <p style={nameStyle}>{l.names}</p>
-                <p style={{ ...metaStyle, marginTop: "0.4rem" }}>{l.level}</p>
+                <p style={metaStyle}>{l.level}</p>
               </div>
             ))}
           </div>

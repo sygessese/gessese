@@ -400,22 +400,28 @@ body {
 }
 
 /* ── Work · rows ──────────────────────────────
-   Two left-aligned columns, name then role, so every role starts on
-   the same line down the page. On a phone the role folds under the name. */
-.work-row {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  column-gap: 2rem;
+   One column: the role follows the name on the same line, a small gap
+   apart. On a phone it folds under the name. The language pairs sit
+   side by side the same way and wrap onto their own lines when narrow. */
+.work-row,
+.work-lang {
+  display: flex;
   align-items: baseline;
+  column-gap: 1rem;
+}
+.work-row {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+}
+.work-langs {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2.5rem;
+  row-gap: 0.75rem;
 }
 @media (max-width: 640px) {
   .work-row {
-    grid-template-columns: 1fr;
-    row-gap: 0.4rem;
-  }
-  /* the two language pairs are short enough to stay side by side */
-  .work-row.work-langs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
