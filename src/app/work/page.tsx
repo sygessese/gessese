@@ -9,28 +9,11 @@ const fadeUp = (delay = 0) => ({
   });
 // ─── Content ──────────────────────────────────────────────────────────────────
 
-const experience: { title: string; role: string; current?: boolean; details: string }[] = [
-  {
-    title: "Axon",
-    role: "Software Engineer",
-    current: true,
-    details: "Live officer tracking, multi-state records search, and the Fusus real-time crime center.",
-  },
-  {
-    title: "HOVER",
-    role: "Software Engineer Intern",
-    details: "Component library, account flows, and feature flags that lifted sales 30%.",
-  },
-  {
-    title: "ACLU",
-    role: "Public Relations",
-    details: "Volunteer program migration that doubled participation.",
-  },
-  {
-    title: "City of Seattle",
-    role: "Ambassador",
-    details: "Amharic translation and community outreach.",
-  },
+const experience: { title: string; role: string; current?: boolean }[] = [
+  { title: "Axon", role: "Software Engineer", current: true },
+  { title: "HOVER", role: "Software Engineer Intern" },
+  { title: "ACLU", role: "Public Relations" },
+  { title: "City of Seattle", role: "Ambassador" },
 ];
 
 const education: { title: string; credential: string; details?: string }[] = [
@@ -45,10 +28,7 @@ const education: { title: string; credential: string; details?: string }[] = [
   },
 ];
 
-const languages = [
-  { label: "Native", value: "English, Amharic" },
-  { label: "Conversational", value: "Spanish, Tigrinya" },
-];
+const languages = "English and Amharic (native), Spanish and Tigrinya (conversational)";
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -168,21 +148,9 @@ export default function Work() {
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "var(--slate)",
-                marginBottom: "0.75rem",
               }}
             >
               {e.role}
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-read)",
-                fontSize: "1rem",
-                fontWeight: 400,
-                lineHeight: 1.65,
-                color: "var(--slate)",
-              }}
-            >
-              {e.details}
             </p>
           </HairlineRow>
         ))}
@@ -238,45 +206,20 @@ export default function Work() {
       {/* ── Languages ── */}
       <motion.div {...fadeUp(0.3)}>
         <SectionLabel>Languages</SectionLabel>
-        <div style={{ borderTop: "1px solid var(--line)" }}>
-          {languages.map((l, i) => (
-            <motion.div
-              key={l.label}
-              {...fadeUp(0.35 + i * 0.06)}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "140px 1fr",
-                gap: "1.5rem",
-                padding: "1.25rem 0",
-                borderBottom: "1px solid var(--line)",
-                alignItems: "baseline",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--slate)",
-                }}
-              >
-                {l.label}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-read)",
-                  fontSize: "1rem",
-                  fontWeight: 400,
-                  lineHeight: 1.65,
-                  color: "var(--ink)",
-                }}
-              >
-                {l.value}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+        <HairlineRow delay={0.35}>
+          <p
+            style={{
+              fontFamily: "var(--font-read)",
+              fontSize: "1rem",
+              fontWeight: 400,
+              lineHeight: 1.65,
+              color: "var(--ink)",
+            }}
+          >
+            {languages}
+          </p>
+        </HairlineRow>
+        <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
     </main>
   );
