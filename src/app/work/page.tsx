@@ -14,26 +14,22 @@ const experience: { title: string; role: string; current?: boolean; details: str
     title: "Axon",
     role: "Software Engineer",
     current: true,
-    details:
-      "Mostly front-end work on apps for first responders, like the one that shows where officers are headed on active calls. On the search team, built features for person, vehicle, and license plate search, including searches that work across state lines. Now on the team behind Fusus, Axon's real-time crime center platform.",
+    details: "Live officer tracking, multi-state records search, and the Fusus real-time crime center.",
   },
   {
     title: "HOVER",
     role: "Software Engineer Intern",
-    details:
-      "Built reusable components for the internal UI library used by about 15 developers. Added feature flags that sent each client group to its own screens, raising membership sales about 30%. Rebuilt the sign-up, activation, and password-reset flows used by 10k+ people, and cleaned up legacy routing code to make it about 400ms faster.",
+    details: "Component library, account flows, and feature flags that lifted sales 30%.",
   },
   {
-    title: "ACLU of Washington",
+    title: "ACLU",
     role: "Public Relations",
-    details:
-      "Moved the volunteer program to an online database, doubling participation, and produced the department's annual report.",
+    details: "Volunteer program migration that doubled participation.",
   },
   {
     title: "City of Seattle",
-    role: "Community Ambassador",
-    details:
-      "Amharic translation, grant program audits, and outreach connecting underrepresented communities with city services.",
+    role: "Ambassador",
+    details: "Amharic translation and community outreach.",
   },
 ];
 
@@ -47,6 +43,11 @@ const education: { title: string; credential: string; details?: string }[] = [
     credential: "Bachelor of Arts, Political Science and Government",
     details: "Three-time Dean's List",
   },
+];
+
+const languages = [
+  { label: "Native", value: "English, Amharic" },
+  { label: "Conversational", value: "Spanish, Tigrinya" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -104,21 +105,21 @@ export default function Work() {
             fontWeight: 500,
             lineHeight: 0.95,
             color: "var(--ink)",
-            marginBottom: "0.5rem",
+            marginBottom: "1rem",
           }}
         >
           Work
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-util)",
-            fontSize: "0.75rem",
-            letterSpacing: "0.15em",
+            fontFamily: "var(--font-read)",
+            fontSize: "clamp(1.05rem, 1.6vw, 1.2rem)",
+            fontWeight: 400,
+            lineHeight: 1.5,
             color: "var(--slate)",
-            textTransform: "uppercase",
           }}
         >
-          Experience · Education
+          Software engineer building real-time tools for public safety.
         </p>
       </motion.div>
 
@@ -232,6 +233,50 @@ export default function Work() {
           </HairlineRow>
         ))}
         <div style={{ borderTop: "1px solid var(--line)" }} />
+      </motion.div>
+
+      {/* ── Languages ── */}
+      <motion.div {...fadeUp(0.3)}>
+        <SectionLabel>Languages</SectionLabel>
+        <div style={{ borderTop: "1px solid var(--line)" }}>
+          {languages.map((l, i) => (
+            <motion.div
+              key={l.label}
+              {...fadeUp(0.35 + i * 0.06)}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "140px 1fr",
+                gap: "1.5rem",
+                padding: "1.25rem 0",
+                borderBottom: "1px solid var(--line)",
+                alignItems: "baseline",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-util)",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "var(--slate)",
+                }}
+              >
+                {l.label}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-read)",
+                  fontSize: "1rem",
+                  fontWeight: 400,
+                  lineHeight: 1.65,
+                  color: "var(--ink)",
+                }}
+              >
+                {l.value}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </main>
   );
