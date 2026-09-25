@@ -9,69 +9,44 @@ const fadeUp = (delay = 0) => ({
   });
 // ─── Content ──────────────────────────────────────────────────────────────────
 
-const experience = [
+const experience: { title: string; role: string; current?: boolean; details: string }[] = [
+  {
+    title: "Axon",
+    role: "Software Engineer",
+    current: true,
+    details:
+      "Mostly front-end work on apps for first responders, like the one that shows where officers are headed on active calls. On the search team, built features for person, vehicle, and license plate search, including searches that work across state lines. Now on the team behind Fusus, Axon's real-time crime center platform.",
+  },
+  {
+    title: "HOVER",
+    role: "Software Engineer Intern",
+    details:
+      "Built reusable components for the internal UI library used by about 15 developers. Added feature flags that sent each client group to its own screens, raising membership sales about 30%. Rebuilt the sign-up, activation, and password-reset flows used by 10k+ people, and cleaned up legacy routing code to make it about 400ms faster.",
+  },
   {
     title: "ACLU of Washington",
     role: "Public Relations",
-    date: "2018 – 2019",
     details:
-      "Migrated local volunteer system to an online database, doubling participation; created documentation for onboarding staff. Produced the annual department report by analyzing communications activity and determining where to divert energy and funds for the following year.",
+      "Moved the volunteer program to an online database, doubling participation, and produced the department's annual report.",
   },
   {
     title: "City of Seattle",
     role: "Community Ambassador",
-    date: "2018 – 2019",
     details:
-      "Provided translation services in Amharic. Audited programs receiving grant funding. Engaged underrepresented communities on public services available to them.",
+      "Amharic translation, grant program audits, and outreach connecting underrepresented communities with city services.",
   },
 ];
 
-const education = [
+const education: { title: string; credential: string; details?: string }[] = [
   {
     title: "Hack Reactor",
-    credential: "Software Engineering",
-    date: "December 2019",
+    credential: "Advanced Software Engineering Immersive",
   },
   {
     title: "University of Washington",
-    credential: "Bachelor of Arts, Political Science",
-    date: "June 2017",
-    details: "Dean's List — Winter 2016, Spring 2016, Spring 2017",
+    credential: "Bachelor of Arts, Political Science and Government",
+    details: "Three-time Dean's List",
   },
-  {
-    title: "Seattle Central College",
-    credential: "Associate of Arts",
-    date: "June 2015",
-    details:
-      "Dean's List — Spring 2014, Fall 2014, Winter 2015, Spring 2015 · President & Founder, Art & Culture Club",
-  },
-];
-
-const projects = [
-  {
-    title: "Twitook",
-    type: "Web Application",
-    description:
-      "Social network with post, comment, and home feed features. Flux architecture with React on the front end; JWT authentication and MongoDB on the back end.",
-    github: "https://github.com/sygessese/twitook",
-  },
-  {
-    title: "Hungry",
-    type: "iOS Mobile App",
-    description:
-      "Geolocation-based restaurant recommender filtering by proximity, hours, and rating. Yelp GraphQL API + Google Maps. Built with React Native, Node.js, and MongoDB.",
-    github: "https://github.com/sygessese/hungry-app-root",
-  },
-];
-
-const skills = [
-  { label: "Languages", value: "JavaScript, CSS, HTML, Java, SQL" },
-  {
-    label: "Frameworks",
-    value: "React, Node.js, Express, Next.js, GatsbyJS, React Native, Bootstrap, Styled Components",
-  },
-  { label: "Databases", value: "PostgreSQL, MySQL, MongoDB, Cassandra" },
-  { label: "Tools", value: "Git, AWS, Docker, Jest, Postman, Loader.io, Nginx, Webpack" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -143,7 +118,7 @@ export default function Work() {
             textTransform: "uppercase",
           }}
         >
-          Experience · Education · Projects
+          Experience · Education
         </p>
       </motion.div>
 
@@ -170,18 +145,20 @@ export default function Work() {
               >
                 {e.title}
               </h2>
-              <span
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.14em",
-                  color: "var(--slate)",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {e.date}
-              </span>
+              {e.current && (
+                <span
+                  style={{
+                    fontFamily: "var(--font-util)",
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.14em",
+                    color: "var(--assassin)",
+                    textTransform: "uppercase",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Current
+                </span>
+              )}
             </div>
             <p
               style={{
@@ -216,37 +193,17 @@ export default function Work() {
         <SectionLabel>Education</SectionLabel>
         {education.map((e, i) => (
           <HairlineRow key={e.title} delay={0.25 + i * 0.08}>
-            <div
+            <h2
               style={{
-                display: "flex",
-                flexDirection: "column-reverse",
-                gap: "0.5rem",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
+                fontWeight: 500,
+                color: "var(--ink)",
                 marginBottom: "0.3rem",
               }}
             >
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 500,
-                  color: "var(--ink)",
-                }}
-              >
-                {e.title}
-              </h2>
-              <span
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.14em",
-                  color: "var(--slate)",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {e.date}
-              </span>
-            </div>
+              {e.title}
+            </h2>
             <p
               style={{
                 fontFamily: "var(--font-util)",
@@ -275,123 +232,6 @@ export default function Work() {
           </HairlineRow>
         ))}
         <div style={{ borderTop: "1px solid var(--line)" }} />
-      </motion.div>
-
-      {/* ── Projects ── */}
-      <motion.div {...fadeUp(0.3)}>
-        <SectionLabel>Projects</SectionLabel>
-        {projects.map((p, i) => (
-          <HairlineRow key={p.title} delay={0.35 + i * 0.08}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                justifyContent: "space-between",
-                gap: "1rem",
-                marginBottom: "0.75rem",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 500,
-                  color: "var(--ink)",
-                }}
-              >
-                {p.title}
-              </h2>
-              <span
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.14em",
-                  color: "var(--slate)",
-                  textTransform: "uppercase",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {p.type}
-              </span>
-            </div>
-            <p
-              style={{
-                fontFamily: "var(--font-read)",
-                fontSize: "1rem",
-                fontWeight: 400,
-                lineHeight: 1.65,
-                color: "var(--slate)",
-                marginBottom: "1rem",
-                maxWidth: "540px",
-              }}
-            >
-              {p.description}
-            </p>
-            <a
-              href={p.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontFamily: "var(--font-util)",
-                fontSize: "0.7rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--assassin)",
-                textDecoration: "none",
-                borderBottom: "1px solid var(--assassin)",
-                paddingBottom: "1px",
-              }}
-            >
-              GitHub ↗
-            </a>
-          </HairlineRow>
-        ))}
-        <div style={{ borderTop: "1px solid var(--line)" }} />
-      </motion.div>
-
-      {/* ── Skills ── */}
-      <motion.div {...fadeUp(0.4)}>
-        <SectionLabel>Skills</SectionLabel>
-        <div style={{ borderTop: "1px solid var(--line)" }}>
-          {skills.map((s, i) => (
-            <motion.div
-              key={s.label}
-              {...fadeUp(0.45 + i * 0.06)}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "120px 1fr",
-                gap: "1.5rem",
-                padding: "1.25rem 0",
-                borderBottom: "1px solid var(--line)",
-                alignItems: "start",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--slate)",
-                  paddingTop: "2px",
-                }}
-              >
-                {s.label}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-read)",
-                  fontSize: "1rem",
-                  fontWeight: 400,
-                  lineHeight: 1.65,
-                  color: "var(--ink)",
-                }}
-              >
-                {s.value}
-              </span>
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
     </main>
   );
