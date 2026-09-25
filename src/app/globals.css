@@ -398,3 +398,26 @@ body {
     padding-bottom: 1rem;
   }
 }
+
+/* ── Work · rows ──────────────────────────────
+   Name left, role right on one line. A long role wraps in place rather
+   than pushing the name; on a phone the role folds under the name.     */
+.work-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+.work-meta {
+  min-width: 0;
+  text-align: right;
+}
+@media (max-width: 640px) {
+  .work-row {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .work-meta {
+    text-align: left;
+  }
+}

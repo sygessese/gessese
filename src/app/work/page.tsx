@@ -9,21 +9,20 @@ const fadeUp = (delay = 0) => ({
   });
 // ─── Content ──────────────────────────────────────────────────────────────────
 
-const experience: { title: string; role: string; current?: boolean }[] = [
-  { title: "Axon", role: "Software Engineer", current: true },
-  { title: "HOVER", role: "Software Engineer Intern" },
-  { title: "ACLU", role: "Public Relations" },
-  { title: "City of Seattle", role: "Ambassador" },
+type Entry = { title: string; meta: string; current?: boolean; details?: string };
+
+const experience: Entry[] = [
+  { title: "Axon", meta: "Software Engineer", current: true },
+  { title: "HOVER", meta: "Software Engineer Intern" },
+  { title: "ACLU", meta: "Public Relations" },
+  { title: "City of Seattle", meta: "Ambassador" },
 ];
 
-const education: { title: string; credential: string; details?: string }[] = [
-  {
-    title: "Hack Reactor",
-    credential: "Advanced Software Engineering Immersive",
-  },
+const education: Entry[] = [
+  { title: "Hack Reactor", meta: "Advanced Software Engineering Immersive" },
   {
     title: "University of Washington",
-    credential: "Bachelor of Arts, Political Science and Government",
+    meta: "Bachelor of Arts, Political Science and Government",
     details: "Three-time Dean's List",
   },
 ];
@@ -56,11 +55,73 @@ function HairlineRow({ children, delay = 0 }: { children: React.ReactNode; delay
       {...fadeUp(delay)}
       style={{
         borderTop: "1px solid var(--line)",
-        padding: "2rem 0",
+        padding: "1.5rem 0",
       }}
     >
       {children}
     </motion.div>
+  );
+}
+
+// Name left, role right, on one line; folds to a stack on a phone (.work-row in globals.css).
+function EntryRow({ entry, delay }: { entry: Entry; delay: number }) {
+  return (
+    <HairlineRow delay={delay}>
+      <div className="work-row">
+        <div style={{ display: "flex", alignItems: "baseline", gap: "0.9rem", flexShrink: 0 }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
+              fontWeight: 500,
+              color: "var(--ink)",
+            }}
+          >
+            {entry.title}
+          </h2>
+          {entry.current && (
+            <span
+              style={{
+                fontFamily: "var(--font-util)",
+                fontSize: "0.65rem",
+                letterSpacing: "0.14em",
+                color: "var(--assassin)",
+                textTransform: "uppercase",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Current
+            </span>
+          )}
+        </div>
+        <p
+          className="work-meta"
+          style={{
+            fontFamily: "var(--font-util)",
+            fontSize: "0.75rem",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "var(--slate)",
+          }}
+        >
+          {entry.meta}
+        </p>
+      </div>
+      {entry.details && (
+        <p
+          style={{
+            fontFamily: "var(--font-read)",
+            fontSize: "0.95rem",
+            fontWeight: 400,
+            lineHeight: 1.65,
+            color: "var(--slate)",
+            marginTop: "0.4rem",
+          }}
+        >
+          {entry.details}
+        </p>
+      )}
+    </HairlineRow>
   );
 }
 
@@ -73,11 +134,14 @@ export default function Work() {
         minHeight: "100vh",
         backgroundColor: "var(--paper)",
         padding: "clamp(5.25rem, 13vw, 10rem) clamp(1.25rem, 3.2vw, 2.5rem) clamp(3rem, 10.4vw, 8rem)",
-        maxWidth: "720px",
+        maxWidth: "900px",
         margin: "0 auto",
       }}
     >
-      <motion.div {...fadeUp(0)}>
+      <motion.div
+        {...fadeUp(0)}
+        style={{ borderBottom: "1px solid var(--ink)", paddingBottom: "clamp(2rem, 4vw, 3rem)" }}
+      >
         <h1
           style={{
             fontFamily: "var(--font-display)",
@@ -107,52 +171,7 @@ export default function Work() {
       <motion.div {...fadeUp(0.1)}>
         <SectionLabel>Experience</SectionLabel>
         {experience.map((e, i) => (
-          <HairlineRow key={e.title} delay={0.15 + i * 0.08}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column-reverse",
-                gap: "0.5rem",
-                marginBottom: "0.4rem",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                  fontWeight: 500,
-                  color: "var(--ink)",
-                }}
-              >
-                {e.title}
-              </h2>
-              {e.current && (
-                <span
-                  style={{
-                    fontFamily: "var(--font-util)",
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.14em",
-                    color: "var(--assassin)",
-                    textTransform: "uppercase",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Current
-                </span>
-              )}
-            </div>
-            <p
-              style={{
-                fontFamily: "var(--font-util)",
-                fontSize: "0.75rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--slate)",
-              }}
-            >
-              {e.role}
-            </p>
-          </HairlineRow>
+          <EntryRow key={e.title} entry={e} delay={0.15 + i * 0.08} />
         ))}
         <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
@@ -161,44 +180,7 @@ export default function Work() {
       <motion.div {...fadeUp(0.2)}>
         <SectionLabel>Education</SectionLabel>
         {education.map((e, i) => (
-          <HairlineRow key={e.title} delay={0.25 + i * 0.08}>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-                fontWeight: 500,
-                color: "var(--ink)",
-                marginBottom: "0.3rem",
-              }}
-            >
-              {e.title}
-            </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-util)",
-                fontSize: "0.75rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--slate)",
-                marginBottom: e.details ? "0.75rem" : 0,
-              }}
-            >
-              {e.credential}
-            </p>
-            {e.details && (
-              <p
-                style={{
-                  fontFamily: "var(--font-util)",
-                  fontSize: "0.8rem",
-                  fontWeight: 400,
-                  lineHeight: 1.7,
-                  color: "var(--slate)",
-                }}
-              >
-                {e.details}
-              </p>
-            )}
-          </HairlineRow>
+          <EntryRow key={e.title} entry={e} delay={0.25 + i * 0.08} />
         ))}
         <div style={{ borderTop: "1px solid var(--line)" }} />
       </motion.div>
